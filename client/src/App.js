@@ -1,30 +1,38 @@
 // client/src/components/App.js
 import { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import AuthenticatedApp from "./components/AuthenticatedApp";
+import UnauthenticatedApp from "./components/UnauthenticatedApp";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [currentUser, setCurrentUser] = useState(null)
+  const [authChecked, setAuthChecked] = useState(false)
 
   useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
+    fetch("/me")
+      .then((resp) => {
+        if (resp.ok) {
+          resp.json().then(user => {
+            setCurrentUser(user)
+            setAuthChecked(true)
+          })
+        } else {
+          setAuthChecked(true)
+        }
+      })
   }, []);
 
+  if(!authChecked) { return <div></div> }
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
-          </Route>
-          <Route path="/">
-            <h1>Page Count: {count}</h1>
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+    <Route>
+      { currentUser ? (
+          <AuthenticatedApp currentUser={currentUser}/>
+        ) : (
+          <UnauthenticatedApp setCurrentUser={setCurrentUser}/>
+        )
+      }
+    </Route>
+  )
 }
 
 export default App;

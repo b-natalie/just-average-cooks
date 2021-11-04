@@ -1,12 +1,18 @@
 class IngredientsController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def create
-        ing = Ingredient.create_with(ingredient_params).find_or_create_by(name: ingredient_params.name)
+        ingredient = Ingredient.find_or_create_by!(ingredient_params)
+        render json: ingredient
     end
 
     private
     
     def ingredient_params
-        params.permit(:name, :sub1_name, :sub2_name)
+        params.permit(:name)
+    end
+
+    def render_unprocessable_entity_response(invalid)
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 end

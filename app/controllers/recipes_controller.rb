@@ -16,7 +16,11 @@ class RecipesController < ApplicationController
         recipe.creator_id = @current_user.id
         recipe.save!
         # add logic for post, would we want to render post instead
-        render json: { recipe }, status: :created
+        post = Post.create!(
+            user_id: @current_user.id,
+            recipe_id: recipe.id
+        )
+        render json: recipe, status: :created
     end
 
     def update
