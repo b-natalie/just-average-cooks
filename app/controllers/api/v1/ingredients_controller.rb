@@ -1,5 +1,6 @@
-class IngredientsController < ApplicationController
+class Api::V1::IngredientsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    Ingredient = Api::V1::Ingredient
 
     def create
         ingredient = Ingredient.find_or_create_by!(ingredient_params)

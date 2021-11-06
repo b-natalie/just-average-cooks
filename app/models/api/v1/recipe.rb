@@ -1,4 +1,4 @@
-class Recipe < ApplicationRecord
+class Api::V1::Recipe < ApplicationRecord
     has_many :rec_ings
     has_many :ingredients, through: :rec_ings
     has_many :posts

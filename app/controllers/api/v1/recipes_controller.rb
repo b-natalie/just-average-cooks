@@ -1,6 +1,7 @@
-class RecipesController < ApplicationController
+class Api::V1::RecipesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    Recipe = Api::V1::Recipe
 
     def index
         render json: Recipe.all

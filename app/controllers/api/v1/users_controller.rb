@@ -1,5 +1,6 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
     skip_before_action :confirm_authentication
+    User = Api::V1::User
 
     def index
         render json: User.all

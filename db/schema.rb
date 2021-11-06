@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_205856) do
+ActiveRecord::Schema.define(version: 2021_11_06_195647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "ingredients", force: :cascade do |t|
+  create_table "api_v1_ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "api_v1_posts", force: :cascade do |t|
     t.integer "user_id"
     t.integer "recipe_id"
     t.integer "simplicity"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_11_04_205856) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "rec_ings", force: :cascade do |t|
+  create_table "api_v1_rec_ings", force: :cascade do |t|
     t.integer "recipe_id"
     t.integer "ingredient_id"
     t.string "quantity"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_11_04_205856) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "recipes", force: :cascade do |t|
+  create_table "api_v1_recipes", force: :cascade do |t|
     t.string "name"
     t.string "link"
     t.string "image"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_11_04_205856) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "api_v1_users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"

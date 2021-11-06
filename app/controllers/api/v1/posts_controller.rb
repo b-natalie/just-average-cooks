@@ -1,6 +1,7 @@
-class PostsController < ApplicationController
+class Api::V1::PostsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    Post = Api::V1::Post
 
     def index
         render json: Post.all

@@ -25,8 +25,9 @@ function App() {
   if(!authChecked) { return <div></div> }
   return (
     <Route>
+      <h1>Just Average Cooks</h1>
       { currentUser ? (
-          <AuthenticatedApp currentUser={currentUser}/>
+          <AuthenticatedApp currentUser={currentUser} setCurrentUser={setCurrentUser}/>
         ) : (
           <UnauthenticatedApp setCurrentUser={setCurrentUser}/>
         )

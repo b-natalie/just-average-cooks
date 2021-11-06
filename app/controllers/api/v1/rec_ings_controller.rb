@@ -1,6 +1,7 @@
-class RecIngsController < ApplicationController
+class Api::V1::RecIngsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    RecIng = Api::V1::RecIng
     
     def index
         render json: RecIng.all

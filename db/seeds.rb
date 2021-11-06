@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User = Api::V1::User
+Recipe = Api::V1::Recipe
+Ingredient = Api::V1::Ingredient
+RecIng = Api::V1::RecIng
+Post = Api::V1::Post
+
 puts "Seeding users"
 
 u1 = User.create(first_name: "Natalie", last_name: "Barba", email: "nbarba2010@gmail.com", password: "123", password_confirmation: "123")
