@@ -40,7 +40,9 @@ Leftovers will keep in the refrigerator for approximately 3-4 days.", creator_id
 r3 = Recipe.create(name: "Easy Avocado Salsa", link: "https://frommybowl.com/easy-avocado-salsa/", image: "https://frommybowl.com/wp-content/uploads/2018/03/Easy_Avocado_Lime_Salsa_7_Ingredients_From_My_Bowl-4.jpg", cuisine: "Mexican", prep_time: 10, cook_time: 0, servings: "3-4 servings", instructions: "Add all ingredients, except for the Avocado, to a medium bowl. Mix well. Add additional Salt to taste, if necessary.
 Gently fold in the Avocado, and serve as desired.", creator_id: u3.id)
 
-# r4 = Recipe.create(name: "", link: "", image: "", cuisine: "", prep_time: , cook_time: , servings: "", instructions: "", creator_id: )
+r4 = Recipe.create(name: "Chili Lime Mango Margaritas", link: "https://minimalistbaker.com/chili-lime-mango-margaritas/", image: "https://minimalistbaker.com/wp-content/uploads/2015/04/SIMPLE-Mango-Chili-Lime-Margaritas-Perfectly-tart-sweet-and-spicy-vegan-minimalistbaker.jpg", cuisine: "Drinks", prep_time: 10, cook_time: 0, servings: "3 margaritas", instructions: "Add all margarita ingredients to a blender and blend until creamy and smooth. Taste and adjust sweetness / strength of alcohol as desired.
+To chill, either blend in a large handful of ice cubes to make a frozen margarita or transfer half of the mixture to a cocktail shaker with plenty of ice and shake vigorously.
+Rim serving glasses with a lime wedge and immediately dip in salt/chili powder mixture (or sub just salt or sugar), and fill with 1 large ice cube or several small. Pour over margarita and garnish with lime wedge.", creator_id: u1.id)
 
 # r5 = Recipe.create(name: "", link: "", image: "", cuisine: "", prep_time: , cook_time: , servings: "", instructions: "", creator_id: )
 
@@ -70,6 +72,13 @@ i14 = Ingredient.create(name: "Lime")
 i15 = Ingredient.create(name: "Salt")
 i16 = Ingredient.create(name: "Avocado")
 
+i17 = Ingredient.create(name: "Mango")
+i18 = Ingredient.create(name: "Orange juice")
+i19 = Ingredient.create(name: "Tequila")
+i20 = Ingredient.create(name: "Hot sauce")
+i21 = Ingredient.create(name: "Maple syrup")
+i22 = Ingredient.create(name: "Chili powder")
+
 puts "Seeding recipe_ingredients"
 
 ri1 = RecIng.create(recipe_id: r1.id, ingredient_id: i1.id, quantity: "1/2 head")
@@ -91,6 +100,12 @@ ri15 = RecIng.create(recipe_id: r3.id, ingredient_id: i14.id, quantity: "1")
 ri16 = RecIng.create(recipe_id: r3.id, ingredient_id: i15.id, quantity: "1/2 teaspoon")
 ri17 = RecIng.create(recipe_id: r3.id, ingredient_id: i16.id, quantity: "2")
 
+ri18 = RecIng.create(recipe_id: r4.id, ingredient_id: i17.id, quantity: "1 ripe")
+ri19 = RecIng.create(recipe_id: r4.id, ingredient_id: i18.id, quantity: "1 cup")
+ri20 = RecIng.create(recipe_id: r4.id, ingredient_id: i19.id, quantity: "3 ounces")
+ri21 = RecIng.create(recipe_id: r4.id, ingredient_id: i14.id, quantity: "2 small")
+ri22 = RecIng.create(recipe_id: r4.id, ingredient_id: i21.id, quantity: "1 tablespoon")
+
 puts "Seeding posts"
 
 p1 = Post.create(user_id: u1.id, recipe_id: r1.id, simplicity: 7, taste: 7)
@@ -98,3 +113,4 @@ p2 = Post.create(user_id: u2.id, recipe_id: r3.id, simplicity: 8, taste: 8)
 p3 = Post.create(user_id: u3.id, recipe_id: r3.id, simplicity: 10, taste: 8)
 p4 = Post.create(user_id: u4.id, recipe_id: r3.id, simplicity: 7, taste: 9)
 p5 = Post.create(user_id: u5.id, recipe_id: r3.id, simplicity: 9, taste: 8)
+p6 = Post.create(user_id: u1.id, recipe_id: r4.id, simplicity: 9, taste: 9)

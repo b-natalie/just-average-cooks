@@ -1,7 +1,20 @@
-import React from "react";
-import Logout from "./Logout";
+import React, { useEffect, useState } from "react";
+import { Route, Switch } from "react-router";
+import AddRecipeForm from "./AddRecipeForm";
+import MyRecipesContainer from "./MyRecipesContainer";
+import NavBar from "./NavBar";
+import RecipeContainer from "./RecipeContainer";
+import RecipeDetailsPage from "./RecipeDetailsPage";
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
+
+    const [ allRecipes, setAllRecipes ] = useState([])
+
+    useEffect(() => {
+        fetch("/api/v1/recipes")
+        .then(resp => resp.json())
+        .then(recipeData => setAllRecipes(recipeData))
+    }, [])
 
     function handleLogout() {
         fetch("/logout", {
@@ -17,8 +30,22 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
 
     return (
         <>
-            <h1>Logged In!</h1>
-            <Logout handleLogout={handleLogout}/>
+            {/* <Logout handleLogout={handleLogout}/> */}
+            <NavBar handleLogout={handleLogout} />
+            <Switch>
+                <Route path="/myrecipes">
+                    <MyRecipesContainer currentUser={currentUser} />
+                </Route>
+                <Route path="/addrecipe">
+                    <AddRecipeForm />
+                </Route>
+                <Route path="/recipes/:id">
+                    <RecipeDetailsPage />
+                </Route>
+                <Route path="/recipes">
+                    <RecipeContainer allRecipes={allRecipes} />
+                </Route>
+            </Switch>
         </>
     )
 }

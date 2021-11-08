@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
     skip_before_action :confirm_authentication
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     User = Api::V1::User
 
     def index
@@ -7,11 +8,8 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def show
-        if current_user
-            render json: @current_user, status: :ok
-        else
-            render json: { error: "You are not logged in" }, status: :unauthorized
-        end
+        user = User.find(params[:id])
+        render json: user
     end
 
     def create
@@ -49,6 +47,10 @@ class Api::V1::UsersController < ApplicationController
     
     def user_params
         params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
+
+    def render_not_found_response
+        render json: { error: "User not found" }, status: :not_found
     end
     
 end

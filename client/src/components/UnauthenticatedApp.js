@@ -6,14 +6,17 @@ import Signup from "./Signup";
 function UnauthenticatedApp( { setCurrentUser }) {
 
     return (
-        <Switch>
-            <Route path="/app">
-                <Login setCurrentUser={setCurrentUser} />
-            </Route>
-            <Route path="/signup">
-                <Signup setCurrentUser={setCurrentUser} />
-            </Route>
-        </Switch>
+        <>
+            <h1>Not signed in</h1>
+            <Switch>
+                <Route exact path="/">
+                    <Login setCurrentUser={setCurrentUser} />
+                </Route>
+                <Route path="/signup">
+                    <Signup setCurrentUser={setCurrentUser} />
+                </Route>
+            </Switch>
+        </>
     )
 }
 

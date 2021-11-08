@@ -1,6 +1,14 @@
 class SessionsController < ApplicationController
     skip_before_action :confirm_authentication, only: [:create]
 
+    def me
+      if current_user
+          render json: @current_user, status: :ok
+      else
+          render json: { error: "You are not logged in" }, status: :unauthorized
+      end
+    end
+
     def create
       user = Api::V1::User.find_by(email: params[:email])
       if user&.authenticate(params[:password])

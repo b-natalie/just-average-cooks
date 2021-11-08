@@ -22,7 +22,7 @@ function Login({ setCurrentUser }) {
             if (resp.ok) {
                 resp.json().then(user => {
                     setCurrentUser(user);
-                    // history push next page
+                    history.push("/recipes")
                 })
             } else {
                 resp.json().then(errors => {
