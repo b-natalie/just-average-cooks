@@ -9,7 +9,12 @@ class Api::V1::RecIngsController < ApplicationController
 
     # add an ingredient to a recipe
     def create
-        rec_ing = RecIng.create!(rec_ing_params)
+        ingredient = Api::V1::Ingredient.find_or_create_by!(name: params[:ingredient_name])
+        rec_ing = RecIng.create!({
+            recipe_id: params[:recipe_id],
+            ingredient_id: ingredient.id,
+            quantity: params[:quantity]
+        })
         render json: rec_ing, status: :created
     end
 

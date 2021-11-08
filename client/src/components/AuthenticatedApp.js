@@ -5,6 +5,7 @@ import MyRecipesContainer from "./MyRecipesContainer";
 import NavBar from "./NavBar";
 import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
+import RecipeEditForm from "./RecipeEditForm";
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
 
@@ -39,8 +40,11 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
                 <Route path="/addrecipe">
                     <AddRecipeForm />
                 </Route>
+                <Route path="/recipes/:id/edit">
+                    <RecipeEditForm currentUser={currentUser}/>
+                </Route>
                 <Route path="/recipes/:id">
-                    <RecipeDetailsPage />
+                    <RecipeDetailsPage currentUser={currentUser}/>
                 </Route>
                 <Route path="/recipes">
                     <RecipeContainer allRecipes={allRecipes} />

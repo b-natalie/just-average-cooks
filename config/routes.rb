@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :ingredients, only: [:create]
+      resources :ingredients, only: [:index, :create]
     end
   end
 

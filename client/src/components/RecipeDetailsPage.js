@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Header, Image } from 'semantic-ui-react';
+import { useParams, useHistory } from "react-router-dom";
+import { Header, Image, Button } from 'semantic-ui-react';
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeInstructions from "./RecipeInstructions";
 import RecipeTimesBar from "./RecipeTimesBar";
 import RecipeRatings from "./RecipeRatings";
 import RecipeCreatorComments from "./RecipeCreatorComments";
 
-function RecipeDetailsPage() {
+
+function RecipeDetailsPage({ currentUser }) {
 
     const recipeId = useParams().id;
+    const history = useHistory()
 
     const [ recipeObj, setRecipeObj ] = useState({
         rec_ings: [],
@@ -25,7 +27,7 @@ function RecipeDetailsPage() {
     }, [])
 
     return (
-        <>
+        <div style={{ textAlign: "center" }}>
             <div style={{textAlign: "center"}}>
                 <Header as='h2' icon textAlign='center'>
                     {/* <Icon name='users' circular /> */}
@@ -50,7 +52,8 @@ function RecipeDetailsPage() {
             <br />
             <RecipeCreatorComments recipeObj={recipeObj} />
             <br />
-        </>
+            {recipeObj.creator.id === currentUser.id ? <Button primary onClick={e => history.push(`/recipes/${recipeId}/edit`)}>Edit recipe</Button> : null}
+        </div>
     )
 }
 
