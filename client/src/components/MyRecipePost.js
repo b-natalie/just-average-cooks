@@ -4,7 +4,6 @@ import { Grid, Button } from 'semantic-ui-react';
 function MyRecipePost({ myPost, toggleEditMode }) {
     return (
         <div>
-            {console.log(myPost.comment)}
             <h3>My thoughts</h3>
             <Grid columns={2} divided centered>
                 <Grid.Row>

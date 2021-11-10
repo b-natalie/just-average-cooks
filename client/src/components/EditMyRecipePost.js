@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Button, Form, Input } from 'semantic-ui-react';
+import { Button, Form, Input } from 'semantic-ui-react';
 
 function EditMyRecipePost({ myPost, updatePost }) {
 

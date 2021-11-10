@@ -107,7 +107,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
             <br />
             <RecipeInstructions recipeObj={recipeObj} />
             <br />
-            <RecipeCreatorComments recipeObj={recipeObj} />
+            <RecipeCreatorComments recipeObj={recipeObj} currentUser={currentUser} />
             <br />
             {recipeObj.creator.id === currentUser.id ? <Button primary onClick={e => history.push(`/recipes/${recipeId}/edit`)}>Edit recipe</Button> : null}
             <br />

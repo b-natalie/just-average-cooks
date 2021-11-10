@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Grid, Image } from 'semantic-ui-react';
+import React from "react";
+import { Grid } from 'semantic-ui-react';
 import AddRecipeCard from "./AddRecipeCard";
 import RecipeCard from "./RecipeCard";
 

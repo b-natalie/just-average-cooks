@@ -1,14 +1,14 @@
 import React from "react";
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
 function RecipeContainer({ allRecipes }) {
 
-    const quarter = allRecipes.length/4
-    const col1 = allRecipes.slice(0, quarter)
-    const col2 = allRecipes.slice(quarter, 2 * quarter)
-    const col3 = allRecipes.slice(2 * quarter, 3 * quarter)
-    const col4 = allRecipes.slice(3 * quarter)
+    // const quarter = allRecipes.length/4
+    // const col1 = allRecipes.slice(0, quarter)
+    // const col2 = allRecipes.slice(quarter, 2 * quarter)
+    // const col3 = allRecipes.slice(2 * quarter, 3 * quarter)
+    // const col4 = allRecipes.slice(3 * quarter)
 
     return (
         <Grid verticalAlign='middle' columns={5} centered>

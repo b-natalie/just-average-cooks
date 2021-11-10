@@ -8,7 +8,7 @@ function RecipeCard({ recipe }) {
             <Link to={`recipes/${recipe.id}`}>
                 <Image
                     src={recipe.image}
-                    as='a'
+                    // as='a'
                     size='medium'
                     target='_blank'
                 />
