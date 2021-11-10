@@ -30,7 +30,19 @@ class Api::V1::UsersController < ApplicationController
                 render json: current_user.errors, status: :unprocessable_entity
             end
         else
-            render json: { error: "Must be logged in to update your profile" }
+            render json: { error: "Must be logged in to update your profile" }, status: :unauthorized
+        end
+    end
+
+    def update_password
+        if current_user&.authenticate(password_params[:password])
+            if current_user.update(password: password_params[:new_password])
+                render json: @current_user, status: :ok
+            else
+                render json: current_user.errors, status: :unprocessable_entity
+            end
+        else
+            render json: { error: "We could not verify you" }, status: :unauthorized
         end
     end
 
@@ -46,7 +58,11 @@ class Api::V1::UsersController < ApplicationController
     private
     
     def user_params
-        params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
+        params.permit(:first_name, :last_name, :email)
+    end
+
+    def password_params
+        params.permit(:password, :new_password)
     end
 
     def render_not_found_response

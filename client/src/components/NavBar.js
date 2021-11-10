@@ -20,7 +20,7 @@ function NavBar({ handleLogout }) {
             //   onClick={this.handleItemClick}
             />
         </Link>
-        <Link to={"/me"}>
+        <Link to="/myprofile">
           <Menu.Item
             name='my profile'
           //   active={activeItem === 'friends'}
