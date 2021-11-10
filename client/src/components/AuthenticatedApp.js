@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import AddRecipeForm from "./AddRecipeForm";
+import MyProfileSettings from "./MyProfileSettings";
 import MyRecipesContainer from "./MyRecipesContainer";
 import NavBar from "./NavBar";
 import OtherUserPage from "./OtherUserPage";
@@ -52,6 +53,9 @@ function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecip
                 </Route>
                 <Route path="/users/:id">
                     <OtherUserPage />
+                </Route>
+                <Route path="/me">
+                    <MyProfileSettings currentUser={currentUser} />
                 </Route>
                 <Route path="/recipes">
                     <RecipeContainer allRecipes={allRecipes} />

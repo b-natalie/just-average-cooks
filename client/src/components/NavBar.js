@@ -20,11 +20,13 @@ function NavBar({ handleLogout }) {
             //   onClick={this.handleItemClick}
             />
         </Link>
-        <Menu.Item
-          name='my profile'
-        //   active={activeItem === 'friends'}
-        //   onClick={this.handleItemClick}
-        />
+        <Link to={"/me"}>
+          <Menu.Item
+            name='my profile'
+          //   active={activeItem === 'friends'}
+          //   onClick={this.handleItemClick}
+          />
+        </Link>
         <Menu.Menu position='right'>
           <Menu.Item>
             <Input icon='search' placeholder='Search...' />
