@@ -36,7 +36,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
                 setPostId(recipe.my_post_info.id)
             }
         })
-    }, [])
+    }, [isUpdated])
 
     function handleSave() {
         saveRecipe(recipeId)
@@ -64,6 +64,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
         .then(resp => resp.json())
         .then(data => {
             toggleEditMode();
+            setIsUpdated(!isUpdated);
         })
     }
 
