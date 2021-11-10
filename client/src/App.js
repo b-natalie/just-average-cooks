@@ -5,10 +5,11 @@ import AuthenticatedApp from "./components/AuthenticatedApp";
 import UnauthenticatedApp from "./components/UnauthenticatedApp";
 
 function App() {
-  const [ currentUser, setCurrentUser ] = useState(null)
-  const [ authChecked, setAuthChecked ] = useState(false)
-  const [ savedRecipes, setSavedRecipes ] = useState([])
-  const [ isSavedOrUnsaved, setIsSavedOrUnsaved ] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
+  const [authChecked, setAuthChecked] = useState(false)
+  const [savedRecipes, setSavedRecipes] = useState([])
+  const [isSavedOrUnsaved, setIsSavedOrUnsaved] = useState(false)
+  const [ isProfileUpdated, setIsProfileUpdated ] = useState(false)
 
   useEffect(() => {
     fetch("/me")
@@ -23,43 +24,56 @@ function App() {
           setAuthChecked(true)
         }
       })
-  }, [isSavedOrUnsaved]);
+  }, [isSavedOrUnsaved, isProfileUpdated]);
 
   function saveRecipe(recipeId) {
     fetch("/api/v1/posts", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            recipe_id: recipeId
-        })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        recipe_id: recipeId
+      })
     })
-    .then(resp => resp.json())
-    .then(postData => {
+      .then(resp => resp.json())
+      .then(postData => {
         setIsSavedOrUnsaved(!isSavedOrUnsaved)
-    })
-}
+      })
+  }
 
-function unsaveRecipe(postId) {
+  function unsaveRecipe(postId) {
     fetch(`/api/v1/posts/${postId}`, {
-        method: "DELETE"
+      method: "DELETE"
     })
-    .then(data => {
+      .then(data => {
         setIsSavedOrUnsaved(!isSavedOrUnsaved)
-    })
-}
+      })
+  }
 
-  if(!authChecked) { return <div></div> }
+  function updateProfileInfo(updatedUserInfo) {
+    fetch(`/api/v1/users/${currentUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(updatedUserInfo)
+    })
+      .then(resp => resp.json())
+      .then(userData => setIsProfileUpdated(!isProfileUpdated))
+  }
+
+  if (!authChecked) { return <div></div> }
   return (
     <Route>
       <h1>Just Average Cooks</h1>
-      { currentUser ? (
-          <AuthenticatedApp currentUser={currentUser} setCurrentUser={setCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe}/>
-        ) : (
-          <UnauthenticatedApp setCurrentUser={setCurrentUser}/>
-        )
+      {currentUser ? (
+        <AuthenticatedApp currentUser={currentUser} setCurrentUser={setCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo}/>
+      ) : (
+        <UnauthenticatedApp setCurrentUser={setCurrentUser} />
+      )
       }
     </Route>
   )

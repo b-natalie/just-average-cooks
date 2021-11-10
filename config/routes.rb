@@ -38,4 +38,6 @@ Rails.application.routes.draw do
   get "/me", to: "sessions#me"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+
+  patch "/edit_password", to: "api/v1/users#update_password"
 end

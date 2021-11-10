@@ -9,7 +9,7 @@ import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecipe, unsaveRecipe }) {
+function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo }) {
 
     const [ allRecipes, setAllRecipes ] = useState([])
 
@@ -54,8 +54,8 @@ function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecip
                 <Route path="/users/:id">
                     <OtherUserPage />
                 </Route>
-                <Route path="/me">
-                    <MyProfileSettings currentUser={currentUser} />
+                <Route path="/myprofile">
+                    <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo}/>
                 </Route>
                 <Route path="/recipes">
                     <RecipeContainer allRecipes={allRecipes} />
