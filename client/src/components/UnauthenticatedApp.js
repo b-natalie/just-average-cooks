@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router";
 import Login from "./Login";
 import Signup from "./Signup";
 
-function UnauthenticatedApp( { setCurrentUser }) {
+function UnauthenticatedApp({ setCurrentUser }) {
 
     return (
         <>

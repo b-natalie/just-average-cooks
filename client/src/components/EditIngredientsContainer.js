@@ -34,7 +34,7 @@ function EditIngredientsContainer({ recIngsArr, setRecIngsArr, recipeId }) {
             method: "DELETE"
         })
         .then(data => {
-            setRecIngsArr(recIngsArr.filter(recIng => recIng.id != recIngToDelete.id))
+            setRecIngsArr(recIngsArr.filter(recIng => recIng.id !== recIngToDelete.id))
         })
     }
 

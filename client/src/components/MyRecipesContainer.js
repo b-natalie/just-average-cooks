@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Image } from 'semantic-ui-react';
 import AddRecipeCard from "./AddRecipeCard";
 import RecipeCard from "./RecipeCard";
 
-function MyRecipesContainer({ currentUser }) {
+function MyRecipesContainer({ savedRecipes }) {
+
     return (
         <Grid verticalAlign='middle' columns={5} centered>
             <Grid.Row>
                 <AddRecipeCard />
-                {currentUser.reposted_recipes.map(recipe => <RecipeCard key ={recipe.id} recipe={recipe}/>)}
+                {savedRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
             </Grid.Row>
         </Grid>
     )

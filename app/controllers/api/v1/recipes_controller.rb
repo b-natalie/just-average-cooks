@@ -9,7 +9,7 @@ class Api::V1::RecipesController < ApplicationController
 
     def show
         recipe = find_recipe
-        render json: recipe
+        render json: recipe, serializer: Api::V1::RecipeDetailsSerializer
     end
 
     def create
@@ -17,10 +17,11 @@ class Api::V1::RecipesController < ApplicationController
         recipe.creator_id = @current_user.id
         recipe.save!
         # add logic for post, would we want to render post instead
-        post = Post.create!(
+        post = Api::V1::Post.create!(
             user_id: @current_user.id,
             recipe_id: recipe.id
         )
+        post.update!(post_params)
         render json: recipe, status: :created
     end
 
@@ -52,6 +53,10 @@ class Api::V1::RecipesController < ApplicationController
 
     def recipe_params
         params.permit(:name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :instructions)
+    end
+
+    def post_params
+        params.permit(:simplicity, :taste, :comment)
     end
 
     def render_not_found_response
