@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Form } from 'semantic-ui-react';
 
-function Signup({ setCurrentUser }) {
+function Signup({ updateCurrentUser }) {
 
     const [ userInfo, setUserInfo ] = useState({
         first_name: "",
@@ -11,11 +12,14 @@ function Signup({ setCurrentUser }) {
         password_confirmation: ""
     })
 
+    let history = useHistory();
+
     function handleUserInput(event) {
         setUserInfo({
             ...userInfo,
             [event.target.name]: event.target.value
         });
+        console.log(userInfo)
     }
 
     function handleSubmit(event) {
@@ -31,8 +35,8 @@ function Signup({ setCurrentUser }) {
         .then(resp => {
             if (resp.ok) {
                 resp.json().then(user => {
-                    setCurrentUser(user);
-                    // history push next page
+                    updateCurrentUser(user);
+                    history.push("/recipes")
                     console.log(user)
                 })
             } else {

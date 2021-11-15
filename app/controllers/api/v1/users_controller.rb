@@ -13,12 +13,19 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def create
-        user = User.new(user_params)
-        if user.save
-            session[:user_id] = user.id
-            render json: user, status: :created
+        @user = User.new(
+            first_name: user_params[:first_name],
+            last_name: user_params[:last_name],
+            email: user_params[:email],
+            password: password_params[:password],
+            password_confirmation: password_params[:password_confirmation]
+        )
+        if @user.save
+            session[:user_id] = @user.id
+            NewUserEmailMailer.with(user: @user).welcome_email.deliver 
+            render json: @user, status: :created
         else
-            render json: user.errors, status: :unprocessable_entity
+            render json: @user.errors, status: :unprocessable_entity
         end
     end
 
@@ -46,13 +53,19 @@ class Api::V1::UsersController < ApplicationController
         end
     end
 
+    # def destroy
+    #     if current_user
+    #         current_user.destroy
+    #         head :no_content
+    #     else
+    #         render json: { error: "Must be logged in to delete your profile" }
+    #     end
+    # end
+
     def destroy
-        if current_user
-            current_user.destroy
-            head :no_content
-        else
-            render json: { error: "Must be logged in to delete your profile" }
-        end
+        user = User.find(params[:id])
+        user.destroy
+        head :no_content
     end
 
     private
@@ -62,7 +75,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def password_params
-        params.permit(:password, :new_password)
+        params.permit(:password, :password_confirmation, :new_password)
     end
 
     def render_not_found_response

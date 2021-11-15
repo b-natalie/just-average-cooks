@@ -5,10 +5,11 @@ import AuthenticatedApp from "./components/AuthenticatedApp";
 import UnauthenticatedApp from "./components/UnauthenticatedApp";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null)
-  const [authChecked, setAuthChecked] = useState(false)
-  const [savedRecipes, setSavedRecipes] = useState([])
-  const [isSavedOrUnsaved, setIsSavedOrUnsaved] = useState(false)
+  const [ currentUser, setCurrentUser ] = useState(null)
+  const [ authChecked, setAuthChecked ] = useState(false)
+  const [ savedRecipes, setSavedRecipes ] = useState([])
+  const [ RecIFollowArr, setRecIFollowArr ] = useState([])
+  const [ isSavedOrUnsaved, setIsSavedOrUnsaved ] = useState(false)
   const [ isProfileUpdated, setIsProfileUpdated ] = useState(false)
 
   useEffect(() => {
@@ -19,12 +20,13 @@ function App() {
             setCurrentUser(user)
             setAuthChecked(true)
             setSavedRecipes(user.reposted_recipes)
+            setRecIFollowArr(user.people_i_follow_recipes)
           })
         } else {
           setAuthChecked(true)
         }
       })
-  }, [isSavedOrUnsaved, isProfileUpdated]);
+  }, [currentUser, isSavedOrUnsaved, isProfileUpdated]);
 
   function saveRecipe(recipeId) {
     fetch("/api/v1/posts", {
@@ -65,14 +67,18 @@ function App() {
       .then(userData => setIsProfileUpdated(!isProfileUpdated))
   }
 
+  function updateCurrentUser(newUser) {
+    setCurrentUser(newUser);
+  }
+
   if (!authChecked) { return <div></div> }
   return (
     <Route>
       <h1>Just Average Cooks</h1>
       {currentUser ? (
-        <AuthenticatedApp currentUser={currentUser} setCurrentUser={setCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo}/>
+        <AuthenticatedApp currentUser={currentUser} updateCurrentUser={updateCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo} RecIFollowArr={RecIFollowArr} />
       ) : (
-        <UnauthenticatedApp setCurrentUser={setCurrentUser} />
+        <UnauthenticatedApp updateCurrentUser={updateCurrentUser} />
       )
       }
     </Route>

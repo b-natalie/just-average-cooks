@@ -20,6 +20,13 @@ function NavBar({ handleLogout }) {
             //   onClick={this.handleItemClick}
             />
         </Link>
+        <Link to="/recipes-people-i-follow">
+          <Menu.Item
+              name='people i follow'
+            //   active={activeItem === 'friends'}
+            //   onClick={this.handleItemClick}
+            />
+            </Link>
         <Link to="/myprofile">
           <Menu.Item
             name='my profile'

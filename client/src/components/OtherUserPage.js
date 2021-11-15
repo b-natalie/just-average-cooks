@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
 function OtherUserPage() {
@@ -25,7 +25,10 @@ function OtherUserPage() {
                     {/* <Icon name='users' circular /> */}
                     <Header.Content>{userObj.first_name} {userObj.last_name}'s Recipes</Header.Content>
                 </Header>
+                {/* WORK ON BUTTON - CHANGE IF FOLLOWING */}
+                <Button primary>Follow</Button>
             </div>
+            <br />
             <Grid verticalAlign='middle' columns={5} centered>
                 <Grid.Row>
                     {userObj.reposted_recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}

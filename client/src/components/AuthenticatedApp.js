@@ -5,11 +5,12 @@ import MyProfileSettings from "./MyProfileSettings";
 import MyRecipesContainer from "./MyRecipesContainer";
 import NavBar from "./NavBar";
 import OtherUserPage from "./OtherUserPage";
+import PeopleIFollowRecipesContainer from "./PeopleIFollowRecipesContainer";
 import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr }) {
 
     const [ allRecipes, setAllRecipes ] = useState([])
 
@@ -29,7 +30,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecip
         })
         .then(resp => {
             if (resp.ok) {
-                setCurrentUser(null)
+                updateCurrentUser(null)
                 history.push("/")
             }
         })
@@ -56,6 +57,9 @@ function AuthenticatedApp({ currentUser, setCurrentUser, savedRecipes, saveRecip
                 </Route>
                 <Route path="/myprofile">
                     <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo}/>
+                </Route>
+                <Route path="/recipes-people-i-follow" >
+                    <PeopleIFollowRecipesContainer RecIFollowArr={RecIFollowArr} />
                 </Route>
                 <Route path="/recipes">
                     <RecipeContainer allRecipes={allRecipes} />
