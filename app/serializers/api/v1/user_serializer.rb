@@ -14,4 +14,5 @@ class Api::V1::UserSerializer < ActiveModel::Serializer
     self.object.followed.each { |person| feed.concat(person.recipes) }
     feed.uniq
   end
+
 end

@@ -12,7 +12,7 @@ import EditMyRecipePost from "./EditMyRecipePost";
 
 function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
 
-    const recipeId = useParams().id;
+    const recipeId = useParams().id
     const history = useHistory()
 
     const [ recipeObj, setRecipeObj ] = useState({
@@ -94,6 +94,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
                 <Image
                     centered
                     href={recipeObj.link}
+                    target="_blank"
                     size='medium'
                     src={recipeObj.image}
                 />

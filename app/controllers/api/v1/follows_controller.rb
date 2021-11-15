@@ -1,12 +1,12 @@
 class Api::V1::FollowsController < ApplicationController
+    Follow = Api::V1::Follow
+
+    def index
+        render json: Follow.all
+    end
     
     def create
-        # new_follow = Api::V1::Follow.new(
-        #     fan_id: current_user.id,
-        #     followed_id: follow_params[:followed_id]
-        # )
-
-        new_follow = Api::V1::Follow.new(follow_params)
+        new_follow = Follow.new(follow_params)
         if new_follow.save
             render json: new_follow
         else
@@ -15,7 +15,9 @@ class Api::V1::FollowsController < ApplicationController
     end
 
     def destroy
-
+        follow = Follow.find(params[:id])
+        follow.destroy!
+        head :no_content
     end
 
     private

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from 'semantic-ui-react';
 
-function Signup({ updateCurrentUser }) {
+function Signup({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
     const [ userInfo, setUserInfo ] = useState({
         first_name: "",
@@ -36,8 +36,8 @@ function Signup({ updateCurrentUser }) {
             if (resp.ok) {
                 resp.json().then(user => {
                     updateCurrentUser(user);
-                    history.push("/recipes")
-                    console.log(user)
+                    toggleIsCurrentUserChanged();
+                    history.push("/recipes");
                 })
             } else {
                 resp.json().then(errors => {

@@ -3,17 +3,17 @@ import { Route, Switch } from "react-router";
 import Login from "./Login";
 import Signup from "./Signup";
 
-function UnauthenticatedApp({ updateCurrentUser }) {
+function UnauthenticatedApp({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
     return (
         <>
             <h1>Not signed in</h1>
             <Switch>
                 <Route exact path="/">
-                    <Login updateCurrentUser={updateCurrentUser} />
+                    <Login updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />
                 </Route>
                 <Route path="/signup">
-                    <Signup updateCurrentUser={updateCurrentUser} />
+                    <Signup updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged}/>
                 </Route>
             </Switch>
         </>

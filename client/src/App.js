@@ -6,6 +6,7 @@ import UnauthenticatedApp from "./components/UnauthenticatedApp";
 
 function App() {
   const [ currentUser, setCurrentUser ] = useState(null)
+  const [ isCurrentUserChanged, setIsCurrentUserChanged ] = useState(false)
   const [ authChecked, setAuthChecked ] = useState(false)
   const [ savedRecipes, setSavedRecipes ] = useState([])
   const [ RecIFollowArr, setRecIFollowArr ] = useState([])
@@ -26,7 +27,8 @@ function App() {
           setAuthChecked(true)
         }
       })
-  }, [currentUser, isSavedOrUnsaved, isProfileUpdated]);
+  }, [isCurrentUserChanged, isSavedOrUnsaved, isProfileUpdated]);
+// }, [currentUser]);
 
   function saveRecipe(recipeId) {
     fetch("/api/v1/posts", {
@@ -71,6 +73,10 @@ function App() {
     setCurrentUser(newUser);
   }
 
+  function toggleIsCurrentUserChanged() {
+    setIsCurrentUserChanged(!isCurrentUserChanged)
+  }
+
   if (!authChecked) { return <div></div> }
   return (
     <Route>
@@ -78,7 +84,7 @@ function App() {
       {currentUser ? (
         <AuthenticatedApp currentUser={currentUser} updateCurrentUser={updateCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo} RecIFollowArr={RecIFollowArr} />
       ) : (
-        <UnauthenticatedApp updateCurrentUser={updateCurrentUser} />
+        <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged}/>
       )
       }
     </Route>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react';
 import { useHistory } from "react-router-dom";
 
-function Login({ updateCurrentUser }) {
+function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,7 +22,8 @@ function Login({ updateCurrentUser }) {
             if (resp.ok) {
                 resp.json().then(user => {
                     updateCurrentUser(user);
-                    history.push("/recipes")
+                    toggleIsCurrentUserChanged();
+                    history.push("/recipes");
                 })
             } else {
                 resp.json().then(errors => {

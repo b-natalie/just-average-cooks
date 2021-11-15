@@ -53,7 +53,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
                     <RecipeDetailsPage currentUser={currentUser} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe}/>
                 </Route>
                 <Route path="/users/:id">
-                    <OtherUserPage />
+                    <OtherUserPage currentUser={currentUser} />
                 </Route>
                 <Route path="/myprofile">
                     <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo}/>
