@@ -7,7 +7,6 @@ function UnauthenticatedApp({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
     return (
         <>
-            <h1>Not signed in</h1>
             <Switch>
                 <Route exact path="/">
                     <Login updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />

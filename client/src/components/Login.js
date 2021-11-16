@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Grid, Segment } from 'semantic-ui-react';
 import { useHistory } from "react-router-dom";
 
 function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
@@ -57,8 +57,9 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
         //     </Form.Field>
         //     <Button type='submit'>Submit</Button>
         // </Form>
+        // <Container style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <Segment placeholder >
-            <Grid columns={2} relaxed='very' stackable>
+            <Grid columns={2} relaxed='very' stackable >
                 <Grid.Column>
                     <Form onSubmit={handleSubmit}>
                         <Form.Input
@@ -87,6 +88,7 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
             <Divider vertical>Or</Divider>
         </Segment>
+        // </Container>
     )
 }
 

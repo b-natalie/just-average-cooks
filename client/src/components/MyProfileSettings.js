@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Header, Button } from 'semantic-ui-react';
 import EditMyProfile from "./EditMyProfile";
 import EditPassword from "./EditPassword";
+import FollowingFollowerContainer from "./FollowingFollowerContainer";
 
-function MyProfileSettings({ currentUser, updateProfileInfo }) {
+function MyProfileSettings({ currentUser, updateProfileInfo, peopleIFollow, peopleFollowingMe }) {
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [ isPwEditMode, setIsPwEditMode ] = useState(false);
@@ -44,7 +45,11 @@ function MyProfileSettings({ currentUser, updateProfileInfo }) {
     }
 
     return (
-        <div>{handleShowForm()}</div>
+        <div>
+            {handleShowForm()}
+            <br />
+            <FollowingFollowerContainer peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe} />
+        </div>
     )
 }
 

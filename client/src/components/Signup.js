@@ -77,7 +77,7 @@ function Signup({ updateCurrentUser, toggleIsCurrentUserChanged }) {
                 <label>Password Confirmation</label>
                 <input name="password_confirmation" type="password" placeholder='*******' onChange={handleUserInput} />
             </Form.Field>
-            <Button type='submit' onClick={handleSubmit} >Submit</Button>
+            <Button type='submit' primary onClick={handleSubmit} >Submit</Button>
         </Form>
     )
 }

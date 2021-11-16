@@ -14,6 +14,9 @@ function App() {
   const [ RecIFollowArr, setRecIFollowArr ] = useState([])
   const [ isSavedOrUnsaved, setIsSavedOrUnsaved ] = useState(false)
   const [ isProfileUpdated, setIsProfileUpdated ] = useState(false)
+  const [ peopleIFollow, setPeopleIFollow ] = useState([])
+  const [ peopleFollowingMe, setPeopleFollowingMe ] = useState([])
+  // const [ profilePic, setProfilePic ] = useState("")
 
   useEffect(() => {
     fetch("/me")
@@ -24,6 +27,9 @@ function App() {
             setAuthChecked(true)
             setSavedRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
+            setPeopleIFollow(user.followed)
+            setPeopleFollowingMe(user.fans)
+            // setProfilePic(user.image)
           })
         } else {
           setAuthChecked(true)
@@ -85,7 +91,7 @@ function App() {
       <Image src={logo} />
     <Route>
       {currentUser ? (
-        <AuthenticatedApp currentUser={currentUser} updateCurrentUser={updateCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo} RecIFollowArr={RecIFollowArr} />
+        <AuthenticatedApp currentUser={currentUser} updateCurrentUser={updateCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo} RecIFollowArr={RecIFollowArr} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
       ) : (
         <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged}/>
       )

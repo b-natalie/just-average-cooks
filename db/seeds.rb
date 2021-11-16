@@ -14,11 +14,11 @@ Post = Api::V1::Post
 
 puts "Seeding users"
 
-u1 = User.create(first_name: "Natalie", last_name: "Barba", email: "nbarba2010@gmail.com", password: "123", password_confirmation: "123")
-u2 = User.create(first_name: "Carrie", last_name: "Bradshaw", email: "carrie@bradshaw.com", password: "123", password_confirmation: "123")
-u3 = User.create(first_name: "Samantha", last_name: "Jones", email: "sam@jones.com", password: "123", password_confirmation: "123")
-u4 = User.create(first_name: "Miranda", last_name: "Hobbes", email: "miranda@hobbes.com", password: "123", password_confirmation: "123")
-u5 = User.create(first_name: "Charlotte", last_name: "York", email: "charlotte@york.com", password: "123", password_confirmation: "123")
+u1 = User.create(first_name: "Natalie", last_name: "Barba", email: "nbarba2010@gmail.com", password: "123", password_confirmation: "123", image: "https://media-exp1.licdn.com/dms/image/C4E03AQH9K0GwrHYmcg/profile-displayphoto-shrink_800_800/0/1517285617095?e=1642636800&v=beta&t=o1Wowe7zWcVewPheJiNg7BpkJehNO-D9JLmfsURX-z0")
+u2 = User.create(first_name: "Carrie", last_name: "Bradshaw", email: "carrie@bradshaw.com", password: "123", password_confirmation: "123", image: "https://upload.wikimedia.org/wikipedia/en/3/34/Carrie_Bradshaw_opening_credits.jpg")
+u3 = User.create(first_name: "Samantha", last_name: "Jones", email: "sam@jones.com", password: "123", password_confirmation: "123", image: "https://static.wikia.nocookie.net/sexandthecity/images/a/ad/Samantha_jones.jpg/revision/latest?cb=20110320183357")
+u4 = User.create(first_name: "Miranda", last_name: "Hobbes", email: "miranda@hobbes.com", password: "123", password_confirmation: "123", image: "https://static.wikia.nocookie.net/sexandthecity/images/b/bf/Miranda2.jpg/revision/latest/top-crop/width/360/height/450?cb=20151031113334")
+u5 = User.create(first_name: "Charlotte", last_name: "York", email: "charlotte@york.com", password: "123", password_confirmation: "123", image: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/the-perfect-present-02-1920-1495132426.jpg")
 
 puts "Seeding recipes"
 

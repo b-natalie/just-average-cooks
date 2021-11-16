@@ -10,7 +10,7 @@ import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr, peopleIFollow, peopleFollowingMe }) {
 
     const [ allRecipes, setAllRecipes ] = useState([])
 
@@ -38,7 +38,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
 
     return (
         <>
-            <NavBar handleLogout={handleLogout} />
+            <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
             <Switch>
                 <Route path="/myrecipes">
                     <MyRecipesContainer savedRecipes={savedRecipes} />
@@ -56,7 +56,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
                     <OtherUserPage currentUser={currentUser} />
                 </Route>
                 <Route path="/myprofile">
-                    <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo}/>
+                    <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
                 </Route>
                 <Route path="/recipes-people-i-follow" >
                     <PeopleIFollowRecipesContainer RecIFollowArr={RecIFollowArr} />
