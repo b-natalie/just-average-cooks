@@ -36,16 +36,16 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
                 setPostId(recipe.my_post_info.id)
             }
         })
-    }, [isUpdated])
+    }, [isSaved, isUpdated])
 
     function handleSave() {
         saveRecipe(recipeId)
-        setIsSaved(!isSaved)
+        setIsSaved(true)
     }
 
     function handleUnsave() {
         unsaveRecipe(postId)
-        setIsSaved(!isSaved)
+        setIsSaved(false)
     }
 
     function toggleEditMode() {

@@ -9,16 +9,16 @@ function MyRecipePost({ myPost, toggleEditMode }) {
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
                         <h4>Simplicity</h4>
-                        <p>{myPost.simplicity} of 10</p>
+                        {myPost ? <p>{myPost.simplicity} of 10</p> : <p>No rating yet</p>}
                     </Grid.Column>
                     <Grid.Column textAlign='center'>
                         <h4>Taste</h4>
-                        <p>{myPost.taste} of 10</p>
+                        {myPost ? <p>{myPost.taste} of 10</p> : <p>No rating yet</p>}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
             <br />
-            <p>"{myPost.comment}"</p>
+            {myPost ? <p>"{myPost.comment}"</p> : null}
             <Button primary onClick={toggleEditMode}>Edit thoughts</Button>
         </div>
     )

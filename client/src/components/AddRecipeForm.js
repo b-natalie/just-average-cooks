@@ -14,8 +14,8 @@ function AddRecipeForm() {
         cook_time: 0,
         servings: 0,
         instructions: "",
-        simplicity: 0,
-        taste: 0,
+        simplicity: null,
+        taste: null,
         comment: ""
     })
 
@@ -67,7 +67,7 @@ function AddRecipeForm() {
                     <br />
                     <Image centered src={newRecipeAndPost.image} size='small' />
                 </Form.Field>
-                <Button primary onClick={handleSubmit}>Add ingredients</Button>
+                <Button primary onClick={handleSubmit}>Add details</Button>
             </Form>
         </div>
     )

@@ -19,8 +19,8 @@ function RecipeEditForm() {
 
     const [myPostEdit, setMyPostEdit] = useState({
         comment: "",
-        simplicity: 0,
-        taste: 0
+        simplicity: null,
+        taste: null
     })
 
     useEffect(() => {

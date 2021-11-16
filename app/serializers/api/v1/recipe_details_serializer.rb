@@ -1,5 +1,5 @@
 class Api::V1::RecipeDetailsSerializer < ActiveModel::Serializer
-  attributes :id, :name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :instructions, :total_time, :average_simplicity, :average_taste, :post_count, :creator, :comments, :my_post_info
+  attributes :id, :name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :instructions, :total_time, :average_simplicity, :average_taste, :post_count, :creator, :comments, :my_post_info, :simplicity_count, :taste_count
 
   has_many :rec_ings
 
@@ -11,12 +11,20 @@ class Api::V1::RecipeDetailsSerializer < ActiveModel::Serializer
     self.object.posts.count
   end
 
+  def simplicity_count
+    self.object.posts.select{|post| post.simplicity != nil && post.simplicity !=0}.count
+  end
+
   def average_simplicity
     self.object.posts.average(:simplicity)
   end
 
   def average_taste
     self.object.posts.average(:taste)
+  end
+
+  def taste_count
+    self.object.posts.select{|post| post.taste != nil && post.taste !=0}.count
   end
 
   def creator 

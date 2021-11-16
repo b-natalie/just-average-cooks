@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header, Button } from 'semantic-ui-react';
+import { Header, Button, Image } from 'semantic-ui-react';
 import EditMyProfile from "./EditMyProfile";
 import EditPassword from "./EditPassword";
 import FollowingFollowerContainer from "./FollowingFollowerContainer";
@@ -20,11 +20,12 @@ function MyProfileSettings({ currentUser, updateProfileInfo, peopleIFollow, peop
     function handleShowForm() {
         if (!isEditMode && !isPwEditMode) {
             return (
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: "center", justifyContent: "center" }}>
                     <Header as='h2' icon textAlign='center'>
                         {/* <Icon name='users' circular /> */}
                         <Header.Content>Profile Settings</Header.Content>
                     </Header>
+                    <img src={currentUser.image} style={{ maxHeight: 175, borderRadius: 175 / 2 }} />
                     <h4>Name</h4>
                     <p>{currentUser.first_name} {currentUser.last_name}</p>
                     <h4>Email</h4>

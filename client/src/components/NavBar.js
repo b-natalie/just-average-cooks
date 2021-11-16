@@ -27,20 +27,22 @@ function NavBar({ handleLogout, profilePic }) {
         //   onClick={this.handleItemClick}
         />
       </Link>
-      <Link to="/myprofile">
+      {/* <Link to="/myprofile">
         <Menu.Item
           name='my profile'
         //   active={activeItem === 'friends'}
         //   onClick={this.handleItemClick}
         />
-      </Link>
+      </Link> */}
       <Menu.Menu position='right'>
         {/* <Menu.Item>
           <Input icon='search' placeholder='Search...' />
         </Menu.Item> */}
-        <Menu.Item>
-          <Image src={profilePic} avatar/>
-        </Menu.Item>
+        <Link to="/myprofile">
+          <Menu.Item>
+            <Image src={profilePic} avatar/>
+          </Menu.Item>
+        </Link>
         <Menu.Item
           name='logout'
           onClick={handleLogout}
