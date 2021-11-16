@@ -1,8 +1,10 @@
 // client/src/components/App.js
 import { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
+import { Image } from "semantic-ui-react";
 import AuthenticatedApp from "./components/AuthenticatedApp";
 import UnauthenticatedApp from "./components/UnauthenticatedApp";
+import logo from "./JustAverageCooksBanner.png";
 
 function App() {
   const [ currentUser, setCurrentUser ] = useState(null)
@@ -79,8 +81,9 @@ function App() {
 
   if (!authChecked) { return <div></div> }
   return (
+    <div>
+      <Image src={logo} />
     <Route>
-      <h1>Just Average Cooks</h1>
       {currentUser ? (
         <AuthenticatedApp currentUser={currentUser} updateCurrentUser={updateCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo} RecIFollowArr={RecIFollowArr} />
       ) : (
@@ -88,6 +91,7 @@ function App() {
       )
       }
     </Route>
+    </div>
   )
 }
 

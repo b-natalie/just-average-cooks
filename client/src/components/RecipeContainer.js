@@ -5,7 +5,7 @@ import RecipeCard from "./RecipeCard";
 function RecipeContainer({ allRecipes }) {
 
     return (
-        <Grid verticalAlign='middle' columns={5} centered>
+        <Grid verticalAlign='middle' columns={5} centered >
             <Grid.Row>
                 {allRecipes.map(recipe => <RecipeCard key ={recipe.id} recipe={recipe}/>)}
             </Grid.Row>

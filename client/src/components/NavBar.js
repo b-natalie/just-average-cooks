@@ -8,7 +8,7 @@ function NavBar({ handleLogout }) {
       <Menu secondary>
         <Link to= "/recipes">
             <Menu.Item
-            name='all recipes'
+            name='discover all'
             //   active={activeItem === 'home'}
             //   onClick={this.handleItemClick}
             />

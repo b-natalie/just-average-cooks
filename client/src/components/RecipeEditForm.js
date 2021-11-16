@@ -78,7 +78,7 @@ function RecipeEditForm() {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} >
                 <Form.Field>
                     <label>Name</label>
                     <input name="name" value={recipeObj.name} onChange={handleRecipeInput} />
@@ -94,7 +94,7 @@ function RecipeEditForm() {
                     <Image centered src={recipeObj.image} size='small' />
                 </Form.Field>
                 <EditIngredientsContainer recIngsArr={recIngsArr} setRecIngsArr={setRecIngsArr} recipeId={recipeObj.id} />
-                <Form.TextArea label='Steps (one sentence = one step)' name="instructions" value={recipeObj.instructions} onChange={handleRecipeInput} />
+                <Form.TextArea label='Steps (new line = new step)' name="instructions" value={recipeObj.instructions} onChange={handleRecipeInput} />
                 <Form.Group widths='equal'>
                     <Form.Field>
                         <label>Prep time (in minutes)</label>
@@ -116,7 +116,7 @@ function RecipeEditForm() {
                         <Input fluid name="taste" value={myPostEdit.taste} onChange={handlePostInput} />
                     </Form.Field>
                 </Form.Group>
-                <Button type='submit' onClick={handleSubmit}>Save</Button>
+                <Button type='submit' primary onClick={handleSubmit}>Save</Button>
             </Form>
         </div>
     )

@@ -93,6 +93,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
                 <br />
                 <Image
                     centered
+                    rounded
                     href={recipeObj.link}
                     target="_blank"
                     size='medium'

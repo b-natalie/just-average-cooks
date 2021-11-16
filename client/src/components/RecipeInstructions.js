@@ -8,7 +8,7 @@ function RecipeInstructions({ recipeObj }) {
                 {/* <Icon name='users' circular /> */}
                 <Header.Content>Steps</Header.Content>
             </Header>
-            {recipeObj.instructions.split(".").map((step, index) => <p>{index + 1}. {step}.</p>)}
+            {recipeObj.instructions.split("\n").map((step, index) => <p>{index + 1}. {step}</p>)}
         </div>
     )
 }

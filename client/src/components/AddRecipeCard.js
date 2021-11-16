@@ -8,6 +8,7 @@ function AddRecipeCard() {
         <Grid.Column>
             <Link to={"/addrecipe"}>
                 <Image
+                    rounded
                     src={image}
                     as='a'
                     size='medium'

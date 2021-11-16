@@ -7,6 +7,7 @@ function RecipeCard({ recipe }) {
         <Grid.Column>
             <Link to={`recipes/${recipe.id}`}>
                 <Image
+                    rounded
                     src={recipe.image}
                     // as='a'
                     size='medium'

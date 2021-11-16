@@ -3,6 +3,11 @@ import { Grid, Button } from 'semantic-ui-react'
 
 function EditIngredient({ ing, handleDelete }) {
 
+    function deleteIng(e) {
+        e.preventDefault()
+        handleDelete(ing)
+    }
+
     return (
         <Grid columns={4} style={{ textAlign: "center" }} >
             <Grid.Column/>
@@ -10,15 +15,10 @@ function EditIngredient({ ing, handleDelete }) {
                 <p>{ing.name}, {ing.quantity}</p>
             </Grid.Column>
             <Grid.Column>
-                <Button negative compact size="mini" onClick={e => handleDelete(ing)}>X</Button>
+                <Button negative compact size="mini" onClick={deleteIng}>X</Button>
             </Grid.Column>
             <Grid.Column/>
         </Grid>
-        // <div>
-        //     <p>
-        //         {ing.name}, {ing.quantity} <Button negative compact size="mini">X</Button>
-        //     </p>
-        // </div>
     )
 }
 

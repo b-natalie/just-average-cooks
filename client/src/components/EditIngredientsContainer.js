@@ -4,7 +4,7 @@ import EditIngredient from "./EditIngredient";
 
 function EditIngredientsContainer({ recIngsArr, setRecIngsArr, recipeId }) {
 
-    const [ isAddIngredient, setIsAddIngredient ] = useState(false)
+    // const [ isAddIngredient, setIsAddIngredient ] = useState(false)
     const [ newIngredient, setNewIngredient ] = useState("")
     const [ newQuantity, setNewQuantity ] = useState("")
 
@@ -25,7 +25,9 @@ function EditIngredientsContainer({ recIngsArr, setRecIngsArr, recipeId }) {
         .then(resp => resp.json())
         .then(data => {
             setRecIngsArr([...recIngsArr, data]);
-            setIsAddIngredient(!isAddIngredient);
+            setNewIngredient("");
+            setNewQuantity("");
+            // setIsAddIngredient(!isAddIngredient);
         })
     }
 
@@ -34,25 +36,26 @@ function EditIngredientsContainer({ recIngsArr, setRecIngsArr, recipeId }) {
             method: "DELETE"
         })
         .then(data => {
+            // debugger
             setRecIngsArr(recIngsArr.filter(recIng => recIng.id !== recIngToDelete.id))
         })
     }
 
-    function showIngredientInputField() {
-        return (
-            <Form onSubmit={handleAdd}>
-                <Form.Field>
-                    <label>New Ingredient</label>
-                    <input name="name" placeholder="Tomato, Lime, Cucumber,..." onChange={e => setNewIngredient(e.target.value)}/>
-                </Form.Field>
-                <Form.Field>
-                    <label>Quantity</label>
-                    <input name="quantity" placeholder="3 medium, 1/4 cup, 1 teaspoon,..." onChange={e => setNewQuantity(e.target.value)}/>
-                </Form.Field>
-                <Button type='submit' onClick={handleAdd}>Add</Button>
-            </Form>
-        )
-    }
+    // function showIngredientInputField() {
+    //     return (
+    //         <Form onSubmit={handleAdd}>
+    //             <Form.Field>
+    //                 <label>New Ingredient</label>
+    //                 <input name="name" placeholder="Tomato, Lime, Cucumber,..." value={newIngredient} onChange={e => setNewIngredient(e.target.value)}/>
+    //             </Form.Field>
+    //             <Form.Field>
+    //                 <label>Quantity</label>
+    //                 <input name="quantity" placeholder="3 medium, 1/4 cup, 1 teaspoon,..." value={newQuantity} onChange={e => setNewQuantity(e.target.value)}/>
+    //             </Form.Field>
+    //             <Button type='submit' onClick={handleAdd}>Add</Button>
+    //         </Form>
+    //     )
+    // }
 
     return (
         <div >
@@ -62,7 +65,18 @@ function EditIngredientsContainer({ recIngsArr, setRecIngsArr, recipeId }) {
             </Header>
             {recIngsArr.map(ing => <EditIngredient key={ing.id} ing={ing} handleDelete={handleDelete}/>)}
             <br />
-            {isAddIngredient ? showIngredientInputField() : <Button primary onClick={e => setIsAddIngredient(!isAddIngredient)}>Add ingredient</Button>}
+            {/* {isAddIngredient ? showIngredientInputField() : <Button primary onClick={e => setIsAddIngredient(!isAddIngredient)}>Add ingredient</Button>} */}
+            <Form onSubmit={handleAdd}>
+                <Form.Field>
+                    <label>New Ingredient</label>
+                    <input name="name" placeholder="Tomato, Lime, Cucumber,..." value={newIngredient} onChange={e => setNewIngredient(e.target.value)}/>
+                </Form.Field>
+                <Form.Field>
+                    <label>Quantity</label>
+                    <input name="quantity" placeholder="3 medium, 1/4 cup, 1 teaspoon,..." value={newQuantity} onChange={e => setNewQuantity(e.target.value)}/>
+                </Form.Field>
+                <Button type='submit' primary onClick={handleAdd}>Add</Button>
+            </Form>
         </div>
     )
 }

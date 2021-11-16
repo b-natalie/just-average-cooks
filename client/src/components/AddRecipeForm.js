@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Image } from 'semantic-ui-react'
+import { Form, Input, Button, Image } from 'semantic-ui-react';
+import EditIngredientsContainer from "./EditIngredientsContainer";
 
 function AddRecipeForm() {
 
@@ -18,7 +19,11 @@ function AddRecipeForm() {
         comment: ""
     })
 
+    const [ isAddIngredient, setIsAddIngredient ] = useState(false)
+    const [ recIngsArr, setRecIngsArr ] = useState([])
+
     let history = useHistory();
+    let recipeId;
 
     function handleInput(e) {
         setNewRecipeAndPost({
@@ -38,7 +43,11 @@ function AddRecipeForm() {
             body: JSON.stringify(newRecipeAndPost)
         })
         .then(resp => resp.json())
-        .then(data => history.push("/myrecipes"))
+        .then(data => {
+            setIsAddIngredient(true)
+            recipeId = data.id
+            history.push(`/recipes/${recipeId}/edit`)
+        })
     }
 
     return (
@@ -58,34 +67,7 @@ function AddRecipeForm() {
                     <br />
                     <Image centered src={newRecipeAndPost.image} size='small' />
                 </Form.Field>
-                {/* <EditIngredientsContainer recIngsArr={recIngsArr} setRecIngsArr={setRecIngsArr} recipeId={recipeObj.id} /> */}
-                <Form.TextArea label='Steps (one sentence = one step)' name="instructions" onChange={handleInput} />
-                <Form.Group widths='equal'>
-                    <Form.Field>
-                        <label>Prep time (in minutes)</label>
-                        <Input fluid name="prep_time" onChange={handleInput} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Cook time (in minutes)</label>
-                        <Input fluid name="cook_time" onChange={handleInput} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Servings</label>
-                        <Input fluid name="servings" onChange={handleInput} />
-                    </Form.Field>
-                </Form.Group>
-                <Form.TextArea label='Comment' name="comment" onChange={handleInput} />
-                <Form.Group widths='equal'>
-                    <Form.Field>
-                        <label>Simplicity (of 10)</label>
-                        <Input fluid name="simplicity" onChange={handleInput} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Taste (of 10)</label>
-                        <Input fluid name="taste" onChange={handleInput} />
-                    </Form.Field>
-                </Form.Group>
-                <Button type='submit' onClick={handleSubmit}>Save</Button>
+                <Button primary onClick={handleSubmit}>Add ingredients</Button>
             </Form>
         </div>
     )
