@@ -6,6 +6,7 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [ errorMessage, setErrorMessage ] = useState(null)
     let history = useHistory();
 
     function handleSubmit(event) {
@@ -23,11 +24,13 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
                 resp.json().then(user => {
                     updateCurrentUser(user);
                     toggleIsCurrentUserChanged();
+                    setErrorMessage(null);
                     history.push("/recipes");
                 })
             } else {
                 resp.json().then(errors => {
-                    console.error(errors);
+                    console.log(errors);
+                    setErrorMessage(errors.error);
                 })
             }
         })
@@ -78,6 +81,7 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Button content='Login' primary />
+                        {errorMessage ? <p style={{backgroundColor: "#FFCCCC"}}>{errorMessage}</p> : null}
                     </Form>
                 </Grid.Column>
 
