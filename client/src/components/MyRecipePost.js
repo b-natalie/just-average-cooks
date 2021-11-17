@@ -9,11 +9,11 @@ function MyRecipePost({ myPost, toggleEditMode }) {
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
                         <h4>Simplicity</h4>
-                        {myPost ? <p>{myPost.simplicity} of 10</p> : <p>No rating yet</p>}
+                        {myPost && myPost.simplicity ? <p>{myPost.simplicity} of 10</p> : <p>No rating yet</p>}
                     </Grid.Column>
                     <Grid.Column textAlign='center'>
                         <h4>Taste</h4>
-                        {myPost ? <p>{myPost.taste} of 10</p> : <p>No rating yet</p>}
+                        {myPost && myPost.taste ? <p>{myPost.taste} of 10</p> : <p>No rating yet</p>}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Form, Input, Button, Image } from 'semantic-ui-react'
 import EditIngredientsContainer from "./EditIngredientsContainer";
 
-function RecipeEditForm() {
+function RecipeEditForm({ deleteRecipe }) {
 
     const recipeId = useParams().id;
     const history = useHistory()
@@ -75,6 +75,10 @@ function RecipeEditForm() {
         )
     }
 
+    function handleDelete() {
+        deleteRecipe(recipeId)
+        history.push("/myrecipes")
+    }
 
     return (
         <div style={{ textAlign: "center" }}>
@@ -118,6 +122,8 @@ function RecipeEditForm() {
                 </Form.Group>
                 <Button type='submit' primary onClick={handleSubmit}>Save</Button>
             </Form>
+            <br/>
+            <Button negative onClick={handleDelete}>Delete</Button>
         </div>
     )
 }

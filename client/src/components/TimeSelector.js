@@ -1,7 +1,10 @@
 import React from "react";
+import { useLocation } from "react-router";
 import { Image } from "semantic-ui-react";
 
 function TimeSelector({ filterForTime }) {
+
+    const location = useLocation().pathname;
 
     function setTime(e) {
         filterForTime(e.target.name)

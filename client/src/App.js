@@ -7,16 +7,17 @@ import UnauthenticatedApp from "./components/UnauthenticatedApp";
 import logo from "./JustAverageCooksBanner.png";
 
 function App() {
-  const [ currentUser, setCurrentUser ] = useState(null)
-  const [ isCurrentUserChanged, setIsCurrentUserChanged ] = useState(false)
-  const [ authChecked, setAuthChecked ] = useState(false)
-  const [ savedRecipes, setSavedRecipes ] = useState([])
-  const [ RecIFollowArr, setRecIFollowArr ] = useState([])
-  const [ isSavedOrUnsaved, setIsSavedOrUnsaved ] = useState(false)
-  const [ isProfileUpdated, setIsProfileUpdated ] = useState(false)
-  const [ peopleIFollow, setPeopleIFollow ] = useState([])
-  const [ peopleFollowingMe, setPeopleFollowingMe ] = useState([])
-  const [ isFollowChanged, setIsFollowChanged ] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
+  const [isCurrentUserChanged, setIsCurrentUserChanged] = useState(false)
+  const [authChecked, setAuthChecked] = useState(false)
+  const [savedRecipes, setSavedRecipes] = useState([])
+  const [RecIFollowArr, setRecIFollowArr] = useState([])
+  const [isSavedOrUnsaved, setIsSavedOrUnsaved] = useState(false)
+  const [isProfileUpdated, setIsProfileUpdated] = useState(false)
+  const [peopleIFollow, setPeopleIFollow] = useState([])
+  const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
+  const [isFollowChanged, setIsFollowChanged] = useState(false)
+  const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
 
   useEffect(() => {
     fetch("/me")
@@ -26,6 +27,7 @@ function App() {
             setCurrentUser(user)
             setAuthChecked(true)
             setSavedRecipes(user.reposted_recipes)
+            setSelectedMyRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
             setPeopleIFollow(user.followed)
             setPeopleFollowingMe(user.fans)
@@ -62,6 +64,15 @@ function App() {
       })
   }
 
+  function deleteRecipe(recipeId) {
+    fetch(`/api/v1/recipes/${recipeId}`, {
+      method: "DELETE"
+    })
+      .then(data => {
+        setIsSavedOrUnsaved(!isSavedOrUnsaved)
+      })
+  }
+
   function updateProfileInfo(updatedUserInfo) {
     fetch(`/api/v1/users/${currentUser.id}`, {
       method: "PATCH",
@@ -91,30 +102,44 @@ function App() {
     setIsFollowChanged(!isFollowChanged)
   }
 
+  function filterMySelectedRecipes(time) {
+    if (time === "0") {
+      setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
+    } else if (time === "21") {
+      setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
+    } else if (time === "41") {
+      setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
+    } else {
+      setSelectedMyRecipes([...savedRecipes])
+    }
+  }
+
   if (!authChecked) { return <div></div> }
   return (
     <div>
       <Image src={logo} />
-    <Route>
-      {currentUser ? (
-        <AuthenticatedApp 
-          currentUser={currentUser} 
-          updateCurrentUser={updateCurrentUser} 
-          savedRecipes={savedRecipes} 
-          saveRecipe={saveRecipe} 
-          unsaveRecipe={unsaveRecipe} 
-          updateProfileInfo={updateProfileInfo} 
-          RecIFollowArr={RecIFollowArr} 
-          peopleIFollow={peopleIFollow} 
-          peopleFollowingMe={peopleFollowingMe} 
-          addMyRecipeToMyContainer={addMyRecipeToMyContainer}
-          toggleIsFollowChanged={toggleIsFollowChanged}
-        />
-      ) : (
-        <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged}/>
-      )
-      }
-    </Route>
+      <Route>
+        {currentUser ? (
+          <AuthenticatedApp
+            currentUser={currentUser}
+            updateCurrentUser={updateCurrentUser}
+            selectedMyRecipes={selectedMyRecipes}
+            saveRecipe={saveRecipe}
+            unsaveRecipe={unsaveRecipe}
+            updateProfileInfo={updateProfileInfo}
+            RecIFollowArr={RecIFollowArr}
+            peopleIFollow={peopleIFollow}
+            peopleFollowingMe={peopleFollowingMe}
+            addMyRecipeToMyContainer={addMyRecipeToMyContainer}
+            toggleIsFollowChanged={toggleIsFollowChanged}
+            filterMySelectedRecipes={filterMySelectedRecipes}
+            deleteRecipe={deleteRecipe}
+          />
+        ) : (
+          <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />
+        )
+        }
+      </Route>
     </div>
   )
 }
