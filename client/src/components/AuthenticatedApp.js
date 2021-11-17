@@ -10,9 +10,10 @@ import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr, peopleIFollow, peopleFollowingMe }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged }) {
 
     const [ allRecipes, setAllRecipes ] = useState([])
+    const [ selectedRecipes, setSelectedRecipes ] = useState([])
 
     let history = useHistory();
 
@@ -21,6 +22,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
         .then(resp => resp.json())
         .then(recipeData => {
             setAllRecipes(recipeData)
+            setSelectedRecipes(recipeData)
         })
     }, [])
 
@@ -36,6 +38,18 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
         })
     }
 
+    function filterForTime(time) {
+        if (time === "0") {
+            setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time < 21))
+        } else if (time === "21") {
+            setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 20 && recipe.total_time < 41))
+        } else if (time === "41") {
+            setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 40))
+        } else {
+            setSelectedRecipes([...allRecipes])
+        }
+    }
+
     return (
         <>
             <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
@@ -44,7 +58,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
                     <MyRecipesContainer savedRecipes={savedRecipes} />
                 </Route>
                 <Route path="/addrecipe">
-                    <AddRecipeForm />
+                    <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer}/>
                 </Route>
                 <Route path="/recipes/:id/edit">
                     <RecipeEditForm currentUser={currentUser}/>
@@ -53,7 +67,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
                     <RecipeDetailsPage currentUser={currentUser} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe}/>
                 </Route>
                 <Route path="/users/:id">
-                    <OtherUserPage currentUser={currentUser} />
+                    <OtherUserPage currentUser={currentUser} toggleIsFollowChanged={toggleIsFollowChanged}/>
                 </Route>
                 <Route path="/myprofile">
                     <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
@@ -62,7 +76,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, savedRecipes, saveRe
                     <PeopleIFollowRecipesContainer RecIFollowArr={RecIFollowArr} />
                 </Route>
                 <Route path="/recipes">
-                    <RecipeContainer allRecipes={allRecipes} />
+                    <RecipeContainer allRecipes={allRecipes} selectedRecipes={selectedRecipes} filterForTime={filterForTime}/>
                 </Route>
             </Switch>
         </>

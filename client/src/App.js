@@ -16,7 +16,7 @@ function App() {
   const [ isProfileUpdated, setIsProfileUpdated ] = useState(false)
   const [ peopleIFollow, setPeopleIFollow ] = useState([])
   const [ peopleFollowingMe, setPeopleFollowingMe ] = useState([])
-  // const [ profilePic, setProfilePic ] = useState("")
+  const [ isFollowChanged, setIsFollowChanged ] = useState(false)
 
   useEffect(() => {
     fetch("/me")
@@ -29,14 +29,12 @@ function App() {
             setRecIFollowArr(user.people_i_follow_recipes)
             setPeopleIFollow(user.followed)
             setPeopleFollowingMe(user.fans)
-            // setProfilePic(user.image)
           })
         } else {
           setAuthChecked(true)
         }
       })
-  }, [isCurrentUserChanged, isSavedOrUnsaved, isProfileUpdated]);
-// }, [currentUser]);
+  }, [isCurrentUserChanged, isSavedOrUnsaved, isProfileUpdated, isFollowChanged]);
 
   function saveRecipe(recipeId) {
     fetch("/api/v1/posts", {
@@ -85,13 +83,33 @@ function App() {
     setIsCurrentUserChanged(!isCurrentUserChanged)
   }
 
+  function addMyRecipeToMyContainer(recipe) {
+    setSavedRecipes([...savedRecipes, recipe])
+  }
+
+  function toggleIsFollowChanged() {
+    setIsFollowChanged(!isFollowChanged)
+  }
+
   if (!authChecked) { return <div></div> }
   return (
     <div>
       <Image src={logo} />
     <Route>
       {currentUser ? (
-        <AuthenticatedApp currentUser={currentUser} updateCurrentUser={updateCurrentUser} savedRecipes={savedRecipes} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} updateProfileInfo={updateProfileInfo} RecIFollowArr={RecIFollowArr} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
+        <AuthenticatedApp 
+          currentUser={currentUser} 
+          updateCurrentUser={updateCurrentUser} 
+          savedRecipes={savedRecipes} 
+          saveRecipe={saveRecipe} 
+          unsaveRecipe={unsaveRecipe} 
+          updateProfileInfo={updateProfileInfo} 
+          RecIFollowArr={RecIFollowArr} 
+          peopleIFollow={peopleIFollow} 
+          peopleFollowingMe={peopleFollowingMe} 
+          addMyRecipeToMyContainer={addMyRecipeToMyContainer}
+          toggleIsFollowChanged={toggleIsFollowChanged}
+        />
       ) : (
         <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged}/>
       )

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Button, Grid, Header } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
-function OtherUserPage({ currentUser }) {
+function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
 
     const userId = useParams().id
     const [ userObj, setUserObj ] = useState({
@@ -38,14 +38,20 @@ function OtherUserPage({ currentUser }) {
                 followed_id: userId
             })
         })
-        .then(setIsFollowedByMe(true))
+        .then(data => {
+            setIsFollowedByMe(true)
+            toggleIsFollowChanged();
+        })
     }
 
     function handleUnfollow() {
         fetch(`/api/v1/follows/${followId}`, {
             method: "DELETE"
         })
-        .then(setIsFollowedByMe(false))
+        .then(data => {
+            setIsFollowedByMe(false)
+            toggleIsFollowChanged();
+        })
     }
 
     return (
