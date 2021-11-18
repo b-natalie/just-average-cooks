@@ -6,7 +6,7 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [ errorMessage, setErrorMessage ] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
     let history = useHistory();
 
     function handleSubmit(event) {
@@ -19,21 +19,21 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
             },
             body: JSON.stringify({ email, password })
         })
-        .then(resp => {
-            if (resp.ok) {
-                resp.json().then(user => {
-                    updateCurrentUser(user);
-                    toggleIsCurrentUserChanged();
-                    setErrorMessage(null);
-                    history.push("/recipes");
-                })
-            } else {
-                resp.json().then(errors => {
-                    console.log(errors);
-                    setErrorMessage(errors.error);
-                })
-            }
-        })
+            .then(resp => {
+                if (resp.ok) {
+                    resp.json().then(user => {
+                        updateCurrentUser(user);
+                        toggleIsCurrentUserChanged();
+                        setErrorMessage(null);
+                        history.push("/recipes");
+                    })
+                } else {
+                    resp.json().then(errors => {
+                        console.log(errors);
+                        setErrorMessage(errors.error);
+                    })
+                }
+            })
     }
 
     function handleSignUpClick() {
@@ -61,38 +61,48 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
         //     <Button type='submit'>Submit</Button>
         // </Form>
         // <Container style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <Segment placeholder >
-            <Grid columns={2} relaxed='very' stackable >
-                <Grid.Column>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Input
-                            icon='user'
-                            iconPosition='left'
-                            label='Email'
-                            placeholder='example@gmail.com'
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <Form.Input
-                            icon='lock'
-                            iconPosition='left'
-                            label='Password'
-                            placeholder='********'
-                            type='password'
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <Button content='Login' primary />
-                        {errorMessage ? <p style={{backgroundColor: "#FFCCCC"}}>{errorMessage}</p> : null}
-                    </Form>
-                </Grid.Column>
+        <Container>
+            <br/>
+            <div style={{textAlign: "center", justifyContent: "center", alignItems: "center"}} >
+                <img src="https://i.imgur.com/PIB3MGx.png" style={{ maxHeight: 250}} />
+            </div>
+            <br/>
+            <Segment placeholder>
+                <Grid columns={2} relaxed='very' stackable >
+                    <Grid.Column>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Input
+                                icon='user'
+                                iconPosition='left'
+                                label='Email'
+                                placeholder='example@gmail.com'
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <Form.Input
+                                icon='lock'
+                                iconPosition='left'
+                                label='Password'
+                                placeholder='********'
+                                type='password'
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <Button content='Login' primary />
+                            {errorMessage ? <p style={{ backgroundColor: "#FFCCCC" }}>{errorMessage}</p> : null}
+                        </Form>
+                    </Grid.Column>
 
-                <Grid.Column verticalAlign='middle'>
-                    <Button content='Sign up' icon='signup' size='big' onClick={handleSignUpClick} />
-                </Grid.Column>
-            </Grid>
-
-            <Divider vertical>Or</Divider>
-        </Segment>
-        // </Container>
+                    <Grid.Column verticalAlign='middle'>
+                        <Button content='Sign up' icon='signup' size='big' onClick={handleSignUpClick} />
+                    </Grid.Column>
+                </Grid>
+                <Divider vertical>Or</Divider>
+            </Segment>
+            <br/>
+            {/* <div style={{textAlign: "center", justifyContent: "center", alignItems: "center"}} >
+                <img src="https://www.pngfind.com/pngs/m/110-1101292_chef-man-emoji-emoji-cocinero-png-transparent-png.png" style={{ maxHeight: 250, borderRadius: 250 / 2}} />
+            </div>
+            <br/> */}
+        </Container>
     )
 }
 
