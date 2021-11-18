@@ -8,7 +8,7 @@ function RecipeIngredients({ recipeObj }) {
                 {/* <Icon name='users' circular /> */}
                 <Header.Content>Ingredients</Header.Content>
             </Header>
-            {console.log(recipeObj)}
+            {console.log(recipeObj.all_ingredients)}
             {recipeObj.all_ingredients.split("\n").map((ing) => <p>{ing}</p>)}
             {/* {recipeObj.rec_ings.map(ing => <p key={ing.id} >{ing.ingredient_and_quantity}</p>)} */}
         </div>

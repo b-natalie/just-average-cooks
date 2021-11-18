@@ -52,7 +52,7 @@ class Api::V1::RecipesController < ApplicationController
     end
 
     def recipe_params
-        params.permit(:name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :instructions)
+        params.permit(:name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :all_ingredients, :instructions)
     end
 
     def post_params
