@@ -63,7 +63,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
                     <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes}/>
                 </Route>
                 <Route path="/addrecipe">
-                    <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer}/>
+                    <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer} changeToRecipe={changeToRecipe}/>
                 </Route>
                 <Route path="/recipes/:id/edit">
                     <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>

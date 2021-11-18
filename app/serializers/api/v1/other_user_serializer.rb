@@ -1,5 +1,5 @@
 class Api::V1::OtherUserSerializer < ActiveModel::Serializer
-    attributes :id, :first_name, :last_name, :email, :created_recipes, :reposted_recipes, :follows_for_user
+    attributes :id, :first_name, :last_name, :email, :image, :created_recipes, :reposted_recipes, :follows_for_user
   
     def created_recipes
       Api::V1::Recipe.where(creator_id: self.object.id)

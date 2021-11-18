@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Image } from 'semantic-ui-react';
 import EditIngredientsContainer from "./EditIngredientsContainer";
 
-function AddRecipeForm({ addMyRecipeToMyContainer }) {
+function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe }) {
 
     const [ newRecipeAndPost, setNewRecipeAndPost ] = useState({
         name: "",
@@ -46,9 +46,10 @@ function AddRecipeForm({ addMyRecipeToMyContainer }) {
         .then(resp => resp.json())
         .then(data => {
             addMyRecipeToMyContainer(data)
+            changeToRecipe()
             // setIsAddIngredient(true)
             recipeId = data.id
-            history.push(`/recipes`)
+            history.push(`/myrecipes`)
         })
     }
 

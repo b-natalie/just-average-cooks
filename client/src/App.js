@@ -5,6 +5,7 @@ import { Image } from "semantic-ui-react";
 import AuthenticatedApp from "./components/AuthenticatedApp";
 import UnauthenticatedApp from "./components/UnauthenticatedApp";
 import logo from "./JustAverageCooksBanner.png";
+import footer from "./Footer.png";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -145,6 +146,7 @@ function App() {
         )
         }
       </Route>
+      <Image src={footer} />
     </div>
   )
 }
