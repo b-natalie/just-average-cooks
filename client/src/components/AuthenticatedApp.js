@@ -10,7 +10,7 @@ import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, filterMySelectedRecipes, deleteRecipe, changeToRecipe }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, filteredRecIFollow, filterFollowRec, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, filterMySelectedRecipes, deleteRecipe, changeToRecipe }) {
 
     const [ allRecipes, setAllRecipes ] = useState([])
     const [ selectedRecipes, setSelectedRecipes ] = useState([])
@@ -63,7 +63,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
                     <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes}/>
                 </Route>
                 <Route path="/addrecipe">
-                    <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer} changeToRecipe={changeToRecipe}/>
+                    <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>
                 </Route>
                 <Route path="/recipes/:id/edit">
                     <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>
@@ -78,7 +78,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
                     <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
                 </Route>
                 <Route path="/recipes-people-i-follow" >
-                    <PeopleIFollowRecipesContainer RecIFollowArr={RecIFollowArr} />
+                    <PeopleIFollowRecipesContainer filteredRecIFollow={filteredRecIFollow} filterFollowRec={filterFollowRec} />
                 </Route>
                 <Route path="/recipes">
                     <RecipeContainer allRecipes={allRecipes} selectedRecipes={selectedRecipes} filterForTime={filterForTime}/>

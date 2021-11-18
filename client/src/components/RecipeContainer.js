@@ -7,7 +7,7 @@ function RecipeContainer({ allRecipes, selectedRecipes, filterForTime }) {
 
     return (
         <div style={{textAlign: "center"}}>
-            <h2>Discover Recipes</h2>
+            <h2>Recipes From Around The World</h2>
             <h4>How many free minutes do you have?</h4>
             <TimeSelector filterForTime={filterForTime} />
             <Grid verticalAlign='middle' columns={5} centered >

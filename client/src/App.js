@@ -12,7 +12,8 @@ function App() {
   const [isCurrentUserChanged, setIsCurrentUserChanged] = useState(false)
   const [authChecked, setAuthChecked] = useState(false)
   const [savedRecipes, setSavedRecipes] = useState([])
-  const [RecIFollowArr, setRecIFollowArr] = useState([])
+  const [recIFollowArr, setRecIFollowArr] = useState([])
+  const [filteredRecIFollow, setFilteredRecIFollow] = useState([])
   const [isSavedOrUnsaved, setIsSavedOrUnsaved] = useState(false)
   const [isProfileUpdated, setIsProfileUpdated] = useState(false)
   const [peopleIFollow, setPeopleIFollow] = useState([])
@@ -30,6 +31,7 @@ function App() {
             setSavedRecipes(user.reposted_recipes)
             setSelectedMyRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
+            setFilteredRecIFollow(user.people_i_follow_recipes)
             setPeopleIFollow(user.followed)
             setPeopleFollowingMe(user.fans)
           })
@@ -119,6 +121,18 @@ function App() {
     }
   }
 
+  function filterFollowRec(time) {
+    if (time === "0") {
+      setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
+    } else if (time === "21") {
+      setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
+    } else if (time === "41") {
+      setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
+    } else {
+      setFilteredRecIFollow([...recIFollowArr])
+    }
+  }
+
   if (!authChecked) { return <div></div> }
   return (
     <div>
@@ -132,7 +146,8 @@ function App() {
             saveRecipe={saveRecipe}
             unsaveRecipe={unsaveRecipe}
             updateProfileInfo={updateProfileInfo}
-            RecIFollowArr={RecIFollowArr}
+            filteredRecIFollow={filteredRecIFollow}
+            filterFollowRec={filterFollowRec}
             peopleIFollow={peopleIFollow}
             peopleFollowingMe={peopleFollowingMe}
             addMyRecipeToMyContainer={addMyRecipeToMyContainer}
