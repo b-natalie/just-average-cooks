@@ -13,7 +13,8 @@ function PeopleIFollowRecipesContainer({ filteredRecIFollow, filterFollowRec }) 
             <TimeSelector filterForTime={filterFollowRec} />
             <Grid verticalAlign='middle' columns={5} centered >
                 <Grid.Row>
-                    {filteredRecIFollow.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
+                    {/* {filteredRecIFollow.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)} */}
+                    {filteredRecIFollow.length > 0 ? filteredRecIFollow.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />) : <h3>You are currently not following anyone<br/><br/>Check out the <Link to="/recipes">discover page</Link></h3> }
                 </Grid.Row>
             </Grid>
         </div>

@@ -28,7 +28,7 @@ function EditMyRecipePost({ myPost, updatePost }) {
                         name="simplicity"
                         label='Simplicity'
                         placeholder='Out of 10'
-                        value={updatedPost.simplicity} 
+                        value={updatedPost.simplicity ? updatedPost.simplicity : null} 
                         onChange={handleInput} 
                     />
                     <Form.Field
@@ -36,7 +36,7 @@ function EditMyRecipePost({ myPost, updatePost }) {
                         name="taste"
                         label='Taste'
                         placeholder='Out of 10' 
-                        value={updatedPost.taste} 
+                        value={updatedPost.taste ? updatedPost.taste : null} 
                         onChange={handleInput}
                     />
                 </Form.Group>

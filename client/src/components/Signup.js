@@ -20,7 +20,6 @@ function Signup({ updateCurrentUser, toggleIsCurrentUserChanged }) {
             ...userInfo,
             [event.target.name]: event.target.value
         });
-        console.log(userInfo)
     }
 
     function handleSubmit(event) {

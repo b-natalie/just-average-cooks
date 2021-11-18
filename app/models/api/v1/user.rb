@@ -11,5 +11,6 @@ class Api::V1::User < ApplicationRecord
     has_many :followed, through: :followed_by_me
 
     validates :email, uniqueness: true
-    validates :first_name, :last_name, :password, :password_confirmation, presence: true
+    # validates :first_name, :last_name, :password, :password_confirmation, presence: true
+    validates :first_name, :last_name, presence: true
 end

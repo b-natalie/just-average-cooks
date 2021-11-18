@@ -28,8 +28,16 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def update
+        # byebug
         if current_user
-            current_user.update!(user_params)
+            current_user.update!(
+                first_name: user_params[:first_name],
+                last_name: user_params[:last_name],
+                email: user_params[:email],
+                image: user_params[:image],
+                # password: @current_user.password,
+                # password_confirmation: @current_user.password_confirmation
+            )
             render json: @current_user, status: :ok
         else
             render json: { error: "Must be logged in to update your profile" }, status: :unauthorized
