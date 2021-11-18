@@ -3,15 +3,16 @@ import { useParams, useHistory } from "react-router-dom";
 import { Form, Input, Button, Image } from 'semantic-ui-react'
 import EditIngredientsContainer from "./EditIngredientsContainer";
 
-function RecipeEditForm({ deleteRecipe }) {
+function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
 
     const recipeId = useParams().id;
     const history = useHistory()
-    const [recIngsArr, setRecIngsArr] = useState([])
+    // const [recIngsArr, setRecIngsArr] = useState([])
     const [isEdited, setIsEdited] = useState(false)
 
     const [recipeObj, setRecipeObj] = useState({
-        rec_ings: [],
+        // rec_ings: [],
+        all_ingredients: "",
         instructions: "",
         creator: {},
         comments: []
@@ -28,7 +29,7 @@ function RecipeEditForm({ deleteRecipe }) {
             .then(resp => resp.json())
             .then(recipe => {
                 setRecipeObj(recipe)
-                setRecIngsArr(recipe.rec_ings)
+                // setRecIngsArr(recipe.rec_ings)
                 setMyPostEdit(recipe.my_post_info)
             })
     }, [])
@@ -69,8 +70,10 @@ function RecipeEditForm({ deleteRecipe }) {
             })
             .then(resp => resp.json())
             .then(data => {
-                setIsEdited(!isEdited)
-                history.push(`/recipes/${recipeId}`)
+                setIsEdited(!isEdited);
+                history.push(`/recipes/${recipeId}`);
+                changeToRecipe();
+                toggleUpdated();
             })
         )
     }
@@ -97,7 +100,8 @@ function RecipeEditForm({ deleteRecipe }) {
                     <br />
                     <Image centered src={recipeObj.image} size='small' />
                 </Form.Field>
-                <EditIngredientsContainer recIngsArr={recIngsArr} setRecIngsArr={setRecIngsArr} recipeId={recipeObj.id} />
+                {/* <EditIngredientsContainer recIngsArr={recIngsArr} setRecIngsArr={setRecIngsArr} recipeId={recipeObj.id} /> */}
+                <Form.TextArea label='Ingredients' name="all_ingredients" value={recipeObj.all_ingredients} onChange={handleRecipeInput} />
                 <Form.TextArea label='Steps (new line = new step)' name="instructions" value={recipeObj.instructions} onChange={handleRecipeInput} />
                 <Form.Group widths='equal'>
                     <Form.Field>

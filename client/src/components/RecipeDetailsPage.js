@@ -16,7 +16,8 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
     const history = useHistory()
 
     const [ recipeObj, setRecipeObj ] = useState({
-        rec_ings: [],
+        // rec_ings: [],
+        all_ingredients: "",
         instructions: "",
         creator: {},
         comments: []

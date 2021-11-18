@@ -8,7 +8,9 @@ function RecipeIngredients({ recipeObj }) {
                 {/* <Icon name='users' circular /> */}
                 <Header.Content>Ingredients</Header.Content>
             </Header>
-            {recipeObj.rec_ings.map(ing => <p key={ing.id} >{ing.ingredient_and_quantity}</p>)}
+            {console.log(recipeObj)}
+            {recipeObj.all_ingredients.split("\n").map((ing) => <p>{ing}</p>)}
+            {/* {recipeObj.rec_ings.map(ing => <p key={ing.id} >{ing.ingredient_and_quantity}</p>)} */}
         </div>
     )
 }

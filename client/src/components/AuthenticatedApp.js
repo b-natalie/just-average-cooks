@@ -10,10 +10,11 @@ import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, filterMySelectedRecipes, deleteRecipe }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, RecIFollowArr, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, filterMySelectedRecipes, deleteRecipe, changeToRecipe }) {
 
     const [ allRecipes, setAllRecipes ] = useState([])
     const [ selectedRecipes, setSelectedRecipes ] = useState([])
+    const [ isUpdated, setIsUpdated ] = useState(false)
 
     let history = useHistory();
 
@@ -24,7 +25,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
             setAllRecipes(recipeData)
             setSelectedRecipes(recipeData)
         })
-    }, [])
+    }, [isUpdated])
 
     function handleLogout() {
         fetch("/logout", {
@@ -36,6 +37,10 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
                 history.push("/")
             }
         })
+    }
+
+    function toggleUpdated() {
+        setIsUpdated(!isUpdated)
     }
 
     function filterForTime(time) {
@@ -61,7 +66,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
                     <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer}/>
                 </Route>
                 <Route path="/recipes/:id/edit">
-                    <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe}/>
+                    <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>
                 </Route>
                 <Route path="/recipes/:id">
                     <RecipeDetailsPage currentUser={currentUser} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe}/>

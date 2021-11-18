@@ -1,5 +1,5 @@
 class Api::V1::RecipeDetailsSerializer < ActiveModel::Serializer
-  attributes :id, :name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :instructions, :total_time, :average_simplicity, :average_taste, :post_count, :creator, :comments, :my_post_info, :simplicity_count, :taste_count
+  attributes :id, :name, :link, :image, :cuisine, :prep_time, :cook_time, :servings, :instructions, :total_time, :average_simplicity, :average_taste, :post_count, :creator, :comments, :my_post_info, :simplicity_count, :taste_count, :all_ingredients
 
   has_many :rec_ings
 

@@ -90,6 +90,10 @@ function App() {
     setCurrentUser(newUser);
   }
 
+  function changeToRecipe() {
+    setIsSavedOrUnsaved(!isSavedOrUnsaved)
+  }
+
   function toggleIsCurrentUserChanged() {
     setIsCurrentUserChanged(!isCurrentUserChanged)
   }
@@ -134,6 +138,7 @@ function App() {
             toggleIsFollowChanged={toggleIsFollowChanged}
             filterMySelectedRecipes={filterMySelectedRecipes}
             deleteRecipe={deleteRecipe}
+            changeToRecipe={changeToRecipe}
           />
         ) : (
           <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />
