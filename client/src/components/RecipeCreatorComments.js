@@ -12,7 +12,7 @@ function RecipeCreatorComments({ recipeObj, currentUser }) {
             <Header as='h3' icon textAlign='center'>
                 <Header.Content>Comments</Header.Content>
             </Header>
-            {recipeObj.comments.filter(comment => comment !== null).map(comment => <p>"{comment}"</p>)}
+            {recipeObj.comments.filter(comment => comment !== null && comment !== "").map(comment => <p>"{comment}"</p>)}
         </div>
     )
 }

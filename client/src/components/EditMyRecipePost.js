@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Input } from 'semantic-ui-react';
+import { Button, Form, Input, Container } from 'semantic-ui-react';
 
 function EditMyRecipePost({ myPost, updatePost }) {
 
@@ -19,7 +19,7 @@ function EditMyRecipePost({ myPost, updatePost }) {
 
     return (
         <div>
-            {console.log(myPost)}
+            <Container>
             <h3>My thoughts</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Group widths='equal'>
@@ -44,6 +44,7 @@ function EditMyRecipePost({ myPost, updatePost }) {
                 <br />
                 <Button primary type="submit" onClick={handleSubmit}>Save</Button>
             </Form>
+            </Container>
         </div>
     )
 }

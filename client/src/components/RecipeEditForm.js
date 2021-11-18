@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Form, Input, Button, Image } from 'semantic-ui-react'
+import { Form, Input, Button, Image, Container } from 'semantic-ui-react'
 import EditIngredientsContainer from "./EditIngredientsContainer";
 
 function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
@@ -85,6 +85,7 @@ function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
 
     return (
         <div style={{ textAlign: "center" }}>
+            <Container>
             <Form onSubmit={handleSubmit} >
                 <Form.Field>
                     <label>Name</label>
@@ -124,10 +125,11 @@ function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
                         <Input fluid name="taste" value={myPostEdit.taste} onChange={handlePostInput} />
                     </Form.Field>
                 </Form.Group>
-                <Button type='submit' primary onClick={handleSubmit}>Save</Button>
+                <Form.Button type='submit' primary onClick={handleSubmit}>Save</Form.Button>
             </Form>
             <br/>
             <Button negative onClick={handleDelete}>Delete</Button>
+            </Container>
         </div>
     )
 }

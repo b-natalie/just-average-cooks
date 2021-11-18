@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Image } from 'semantic-ui-react';
+import { Form, Input, Button, Image, Container } from 'semantic-ui-react';
 import EditIngredientsContainer from "./EditIngredientsContainer";
 
 function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated }) {
 
-    const [ newRecipeAndPost, setNewRecipeAndPost ] = useState({
+    const [newRecipeAndPost, setNewRecipeAndPost] = useState({
         name: "",
         link: "",
         image: "",
@@ -43,60 +43,62 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
             },
             body: JSON.stringify(newRecipeAndPost)
         })
-        .then(resp => resp.json())
-        .then(data => {
-            addMyRecipeToMyContainer(data)
-            changeToRecipe()
-            toggleUpdated()
-            // setIsAddIngredient(true)
-            recipeId = data.id
-            history.push(`/myrecipes`)
-        })
+            .then(resp => resp.json())
+            .then(data => {
+                addMyRecipeToMyContainer(data)
+                changeToRecipe()
+                toggleUpdated()
+                // setIsAddIngredient(true)
+                recipeId = data.id
+                history.push(`/myrecipes`)
+            })
     }
 
     return (
         <div style={{ textAlign: "center" }}>
-            <Form onSubmit={handleSubmit}>
-                <Form.Field>
-                    <label>Name</label>
-                    <input name="name" onChange={handleInput}/>
-                </Form.Field>
-                <Form.Field>
-                    <label>Link</label>
-                    <input name="link" onChange={handleInput}/>
-                </Form.Field>
-                <Form.Field>
-                    <label>Image url</label>
-                    <input name="image" onChange={handleInput}/>
-                    <br />
-                    <Image centered src={newRecipeAndPost.image} size='small' />
-                </Form.Field>
-                <Form.TextArea label='Ingredients' name="all_ingredients" value={newRecipeAndPost.all_ingredients} onChange={handleInput} />
-                <Form.TextArea label='Steps (new line = new step)' name="instructions" value={newRecipeAndPost.instructions} onChange={handleInput} />
-                <Form.Group widths='equal'>
+            <Container>
+                <Form onSubmit={handleSubmit}>
                     <Form.Field>
-                        <label>Prep time (in minutes)</label>
-                        <Input fluid name="prep_time" value={newRecipeAndPost.prep_time} onChange={handleInput} />
+                        <label>Name</label>
+                        <input name="name" onChange={handleInput} />
                     </Form.Field>
                     <Form.Field>
-                        <label>Cook time (in minutes)</label>
-                        <Input fluid name="cook_time" value={newRecipeAndPost.cook_time} onChange={handleInput} />
-                    </Form.Field>
-                </Form.Group>
-                <Form.TextArea label='Comment' name="comment" value={newRecipeAndPost.comment} onChange={handleInput} />
-                <Form.Group widths='equal'>
-                    <Form.Field>
-                        <label>Simplicity (of 10)</label>
-                        <Input fluid name="simplicity" value={newRecipeAndPost.simplicity} onChange={handleInput} />
+                        <label>Link</label>
+                        <input name="link" onChange={handleInput} />
                     </Form.Field>
                     <Form.Field>
-                        <label>Taste (of 10)</label>
-                        <Input fluid name="taste" value={newRecipeAndPost.taste} onChange={handleInput} />
+                        <label>Image url</label>
+                        <input name="image" onChange={handleInput} />
+                        <br />
+                        <Image centered src={newRecipeAndPost.image} size='small' />
                     </Form.Field>
-                </Form.Group>
-                <Form.Button type='submit' primary onClick={handleSubmit}>Save</Form.Button>
-            </Form>
-                {/* <Button primary onClick={handleSubmit}>Add details</Button>
+                    <Form.TextArea label='Ingredients' name="all_ingredients" value={newRecipeAndPost.all_ingredients} onChange={handleInput} />
+                    <Form.TextArea label='Steps (new line = new step)' name="instructions" value={newRecipeAndPost.instructions} onChange={handleInput} />
+                    <Form.Group widths='equal'>
+                        <Form.Field>
+                            <label>Prep time (in minutes)</label>
+                            <Input fluid name="prep_time" value={newRecipeAndPost.prep_time} onChange={handleInput} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Cook time (in minutes)</label>
+                            <Input fluid name="cook_time" value={newRecipeAndPost.cook_time} onChange={handleInput} />
+                        </Form.Field>
+                    </Form.Group>
+                    <Form.TextArea label='Comment' name="comment" value={newRecipeAndPost.comment} onChange={handleInput} />
+                    <Form.Group widths='equal'>
+                        <Form.Field>
+                            <label>Simplicity (of 10)</label>
+                            <Input fluid name="simplicity" value={newRecipeAndPost.simplicity} onChange={handleInput} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Taste (of 10)</label>
+                            <Input fluid name="taste" value={newRecipeAndPost.taste} onChange={handleInput} />
+                        </Form.Field>
+                    </Form.Group>
+                    <Form.Button type='submit' primary onClick={handleSubmit}>Save</Form.Button>
+                </Form>
+            </Container>
+            {/* <Button primary onClick={handleSubmit}>Add details</Button>
             </Form> */}
         </div>
     )

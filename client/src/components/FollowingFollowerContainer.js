@@ -1,10 +1,11 @@
 import React from "react";
-import { Grid, Header, Image, List } from 'semantic-ui-react';
+import { Grid, Header, Image, List, Container } from 'semantic-ui-react';
 import FollowingFollowerCard from "./FollowingFollowerCard";
 
 function FollowingFollowerContainer({ peopleIFollow, peopleFollowingMe }) {
     return (
         <div>
+            <Container style={{maxWidth: 500}}>
             <Grid>
                 <Grid.Column width={8}>
                     <Grid.Row>
@@ -24,6 +25,7 @@ function FollowingFollowerContainer({ peopleIFollow, peopleFollowingMe }) {
                     </List>
                 </Grid.Column>
             </Grid>
+            </Container>
         </div>
     )
 }

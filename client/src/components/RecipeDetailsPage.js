@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Header, Image, Button } from 'semantic-ui-react';
+import { Header, Image, Button, Container } from 'semantic-ui-react';
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeInstructions from "./RecipeInstructions";
 import RecipeTimesBar from "./RecipeTimesBar";
@@ -83,6 +83,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
 
     return (
         <div style={{ textAlign: "center" }}>
+            <Container>
             {/* {console.log(recipeObj.my_post_info)} */}
             <div style={{textAlign: "center"}}>
                 <Header as='h2' icon textAlign='center'>
@@ -115,6 +116,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
             {recipeObj.creator.id === currentUser.id ? <Button primary onClick={e => history.push(`/recipes/${recipeId}/edit`)}>Edit recipe</Button> : null}
             <br />
             {showMyPost()}
+            </Container>
         </div>
     )
 }
