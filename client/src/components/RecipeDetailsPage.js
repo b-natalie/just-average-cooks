@@ -20,8 +20,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
         all_ingredients: "",
         instructions: "",
         creator: {},
-        comments: [],
-        all_ingredients: ""
+        comments: []
     })
     const [ isSaved, setIsSaved ] = useState(false)
     const [ postId, setPostId ] = useState(0)
@@ -108,7 +107,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
             <RecipeTimesBar recipeObj={recipeObj} />
             <br />
             <br />
-            <RecipeIngredients recipeObj={recipeObj} />
+            <RecipeIngredients ingredients={recipeObj.all_ingredients} />
             <br />
             <RecipeInstructions recipeObj={recipeObj} />
             <br />
