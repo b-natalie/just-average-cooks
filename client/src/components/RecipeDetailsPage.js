@@ -21,7 +21,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
         instructions: "",
         creator: {},
         comments: [],
-        all_ingredients: []
+        all_ingredients: ""
     })
     const [ isSaved, setIsSaved ] = useState(false)
     const [ postId, setPostId ] = useState(0)
