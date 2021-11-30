@@ -54,11 +54,11 @@ ActiveRecord::Schema.define(version: 2021_11_18_015011) do
     t.integer "prep_time"
     t.integer "cook_time"
     t.string "servings"
-    t.string "all_ingredients"
     t.string "instructions"
     t.integer "creator_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "all_ingredients"
   end
 
   create_table "api_v1_users", force: :cascade do |t|
