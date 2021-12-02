@@ -1,7 +1,7 @@
 // client/src/components/App.js
 import { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
-import { Image, Segment } from "semantic-ui-react";
+import { Image } from "semantic-ui-react";
 import AuthenticatedApp from "./components/AuthenticatedApp";
 import UnauthenticatedApp from "./components/UnauthenticatedApp";
 import logo from "./JustAverageCooksBanner.png";

@@ -37,8 +37,8 @@ function Signup({ updateCurrentUser, toggleIsCurrentUserChanged }) {
                 resp.json().then(user => {
                     updateCurrentUser(user);
                     toggleIsCurrentUserChanged();
-                    setErrorMessages([]);
                     history.push("/recipes");
+                    setErrorMessages([]);
                 })
             } else {
                 resp.json().then(errors => {

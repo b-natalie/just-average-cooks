@@ -12,7 +12,7 @@ function UnauthenticatedApp({ updateCurrentUser, toggleIsCurrentUserChanged }) {
                     <Login updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />
                 </Route>
                 <Route path="/signup">
-                    <Signup updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged}/>
+                    <Signup updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />
                 </Route>
             </Switch>
         </>
