@@ -32,21 +32,21 @@ function Signup({ updateCurrentUser, toggleIsCurrentUserChanged }) {
             },
             body: JSON.stringify(userInfo)
         })
-            .then(resp => {
-                if (resp.ok) {
-                    resp.json().then(user => {
-                        updateCurrentUser(user);
-                        toggleIsCurrentUserChanged();
-                        setErrorMessages([]);
-                        history.push("/recipes");
-                    })
-                } else {
-                    resp.json().then(errors => {
-                        setErrorMessages(errors.errors)
-                        // console.error(errors);
-                    })
-                }
-            })
+        .then(resp => {
+            if (resp.ok) {
+                resp.json().then(user => {
+                    updateCurrentUser(user);
+                    toggleIsCurrentUserChanged();
+                    setErrorMessages([]);
+                    history.push("/recipes");
+                })
+            } else {
+                resp.json().then(errors => {
+                    setErrorMessages(errors.errors)
+                    console.error(errors);
+                })
+            }
+        })
     }
 
     return (
