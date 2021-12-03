@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Container } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 import TimeSelector from "./TimeSelector";

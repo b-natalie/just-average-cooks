@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header, Container } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
 function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
@@ -56,22 +56,24 @@ function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <div style={{textAlign: "center"}}>
-                <img src={userObj.image} style={{ maxHeight: 125, borderRadius: 175 / 2 }} />
-                <Header as='h2' icon textAlign='center'>
-                    {/* <Icon name='users' circular /> */}
-                    <Header.Content>{userObj.first_name} {userObj.last_name}'s Recipes</Header.Content>
-                </Header>
-                    <br />
-                {/* WORK ON BUTTON - CHANGE IF FOLLOWING */}
-                {isFollowedByMe ? <Button onClick={handleUnfollow}>Unfollow</Button> : <Button primary onClick={handleFollow}>Follow</Button>}
-            </div>
-            <br />
-            <Grid verticalAlign='middle' columns={5} centered>
-                <Grid.Row>
-                    {userObj.reposted_recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
-                </Grid.Row>
-            </Grid>
+            <Container>
+                <div style={{textAlign: "center"}}>
+                    <img src={userObj.image} style={{ maxHeight: 125, borderRadius: 175 / 2 }} />
+                    <Header as='h2' icon textAlign='center'>
+                        {/* <Icon name='users' circular /> */}
+                        <Header.Content>{userObj.first_name} {userObj.last_name}'s Recipes</Header.Content>
+                    </Header>
+                        <br />
+                    {/* WORK ON BUTTON - CHANGE IF FOLLOWING */}
+                    {isFollowedByMe ? <Button onClick={handleUnfollow}>Unfollow</Button> : <Button primary onClick={handleFollow}>Follow</Button>}
+                </div>
+                <br />
+                <Grid verticalAlign='middle' columns={5} centered>
+                    <Grid.Row>
+                        {userObj.reposted_recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
+                    </Grid.Row>
+                </Grid>
+            </Container>
         </div>
     )
 }
