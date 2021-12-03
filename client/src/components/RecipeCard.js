@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function RecipeCard({ recipe }) {
     return (
         <Grid.Column>
-            <Link to={`recipes/${recipe.id}`}>
+            <Link to={`/recipes/${recipe.id}`}>
                 <Image
                     rounded
                     src={recipe.image}
