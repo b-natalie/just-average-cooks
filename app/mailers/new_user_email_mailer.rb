@@ -3,7 +3,7 @@ class NewUserEmailMailer < ApplicationMailer
 
     def welcome_email
         @user = params[:user]
-        mail(to: @user.email, subject: "Welcome to Just Average Cooks", from: ENV["gmail_username"])
+        mail(to: @user.email, subject: "Welcome to Just Average Cooks")
     end
 
 end

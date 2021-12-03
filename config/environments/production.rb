@@ -59,7 +59,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp 
   # host = "localhost:3000"
-  config.action_mailer.default_url_options = { host: "just-average-cooks.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "just-average-cooks.herokuapp.com", from: ENV["gmail_username"] }
 
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
