@@ -99,7 +99,7 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
             </Segment>
             <br/>
             <div style={{textAlign: "center", justifyContent: "center", alignItems: "center"}} >
-                <img src="https://www.pngfind.com/pngs/m/110-1101292_chef-man-emoji-emoji-cocinero-png-transparent-png.png" style={{ maxHeight: 250, borderRadius: 250 / 2}} />
+                <img src="https://i.imgur.com/KbJcrCL.png" style={{ maxHeight: 250, borderRadius: 250 / 2}} />
             </div>
             <br/>
         </Container>
