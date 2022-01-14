@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
         )
         @user.save!
         session[:user_id] = @user.id
-        NewUserEmailMailer.with(user: @user).welcome_email.deliver 
+        NewUserEmailMailer.with(user: @user, from: ENV["gmail_username"]).welcome_email.deliver 
         render json: @user, status: :created
     end
 
