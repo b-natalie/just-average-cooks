@@ -1,6 +1,19 @@
 # config/routes.rb
-Rails.application.routes.draw do
 
+mount ActionCable.server => "/cable"
+
+Rails.application.routes.draw do
+  
+  namespace :api do
+    namespace :v1 do
+      resources :direct_messages
+    end
+  end
+  namespace :api do
+    namespace :v1 do
+      resources :conversations
+    end
+  end
   namespace :api do
     namespace :v1 do
       resources :follows, only: [:index, :create, :destroy]
