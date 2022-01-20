@@ -9,6 +9,8 @@ class Api::V1::User < ApplicationRecord
     has_many :fans, through: :following_me
     has_many :followed_by_me, foreign_key: :fan_id, :class_name => "Follow"
     has_many :followed, through: :followed_by_me
+    has_many :conversations
+    has_many :direct_messages
 
     validates :email, uniqueness: true
     # validates :first_name, :last_name, :password, :password_confirmation, presence: true

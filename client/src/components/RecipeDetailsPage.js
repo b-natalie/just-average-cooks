@@ -16,7 +16,6 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
     const history = useHistory()
 
     const [ recipeObj, setRecipeObj ] = useState({
-        // rec_ings: [],
         all_ingredients: "",
         instructions: "",
         creator: {},
@@ -84,10 +83,8 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
     return (
         <div style={{ textAlign: "center" }}>
             <Container>
-            {/* {console.log(recipeObj.my_post_info)} */}
             <div style={{textAlign: "center"}}>
                 <Header as='h2' icon textAlign='center'>
-                    {/* <Icon name='users' circular /> */}
                     <Header.Content>{recipeObj.name}</Header.Content>
                     {isSaved ? <Button size='mini' onClick={handleUnsave}>Saved</Button> : <Button primary size='mini' onClick={handleSave}>Save</Button>}
                 </Header>
@@ -106,7 +103,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
             <br />
             <RecipeTimesBar recipeObj={recipeObj} />
             <br />
-            <br />
+            <h3>Makes: </h3><p>{recipeObj.servings}</p>
             <RecipeIngredients ingredients={recipeObj.all_ingredients} />
             <br />
             <RecipeInstructions recipeObj={recipeObj} />
