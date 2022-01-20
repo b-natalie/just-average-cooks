@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Image, Input, Menu } from 'semantic-ui-react';
+import { Image, Icon, Menu } from 'semantic-ui-react';
 
 function NavBar({ handleLogout, profilePic }) {
 
@@ -27,17 +27,13 @@ function NavBar({ handleLogout, profilePic }) {
         //   onClick={this.handleItemClick}
         />
       </Link>
-      {/* <Link to="/myprofile">
-        <Menu.Item
-          name='my profile'
-        //   active={activeItem === 'friends'}
-        //   onClick={this.handleItemClick}
-        />
-      </Link> */}
-      <Menu.Menu position='right'>
-        {/* <Menu.Item>
-          <Input icon='search' placeholder='Search...' />
-        </Menu.Item> */}
+      <Menu.Menu position='right' verticalAlign="center">
+        <Link to="/myprofile">
+          <Menu.Item>
+            <Icon size="large" name="envelope outline"/>
+          </Menu.Item>
+        </Link>
+        {/* <Button color="green"><Icon name="envelope outline"/></Button> */}
         <Link to="/myprofile">
           <Menu.Item>
             <Image src={profilePic} avatar/>
@@ -46,8 +42,6 @@ function NavBar({ handleLogout, profilePic }) {
         <Menu.Item
           name='logout'
           onClick={handleLogout}
-        // active={activeItem === 'logout'}
-        // onClick={this.handleItemClick}
         />
       </Menu.Menu>
     </Menu>

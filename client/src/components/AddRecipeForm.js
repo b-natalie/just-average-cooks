@@ -20,9 +20,6 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
         comment: ""
     })
 
-    // const [ isAddIngredient, setIsAddIngredient ] = useState(false)
-    // const [ recIngsArr, setRecIngsArr ] = useState([])
-
     let history = useHistory();
     let recipeId;
 
@@ -48,7 +45,6 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
                 addMyRecipeToMyContainer(data)
                 changeToRecipe()
                 toggleUpdated()
-                // setIsAddIngredient(true)
                 recipeId = data.id
                 history.push(`/myrecipes`)
             })
@@ -72,9 +68,11 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
                         <br />
                         <Image centered src={newRecipeAndPost.image} size='small' />
                     </Form.Field>
-                    <Form.TextArea label='Ingredients' name="all_ingredients" value={newRecipeAndPost.all_ingredients} onChange={handleInput} />
-                    <Form.TextArea label='Steps (new line = new step)' name="instructions" value={newRecipeAndPost.instructions} onChange={handleInput} />
                     <Form.Group widths='equal'>
+                        <Form.Field>
+                            <label>Servings</label>
+                            <Input fluid name="servings" value={newRecipeAndPost.servings} onChange={handleInput} />
+                        </Form.Field>
                         <Form.Field>
                             <label>Prep time (in minutes)</label>
                             <Input fluid name="prep_time" value={newRecipeAndPost.prep_time} onChange={handleInput} />
@@ -84,7 +82,8 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
                             <Input fluid name="cook_time" value={newRecipeAndPost.cook_time} onChange={handleInput} />
                         </Form.Field>
                     </Form.Group>
-                    <Form.TextArea label='Comment' name="comment" value={newRecipeAndPost.comment} onChange={handleInput} />
+                    <Form.TextArea label='Ingredients' name="all_ingredients" value={newRecipeAndPost.all_ingredients} onChange={handleInput} />
+                    <Form.TextArea label='Steps (new line = new step)' name="instructions" value={newRecipeAndPost.instructions} onChange={handleInput} />
                     <Form.Group widths='equal'>
                         <Form.Field>
                             <label>Simplicity (of 10)</label>
@@ -95,11 +94,10 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
                             <Input fluid name="taste" value={newRecipeAndPost.taste} onChange={handleInput} />
                         </Form.Field>
                     </Form.Group>
+                    <Form.TextArea label='Comment' name="comment" value={newRecipeAndPost.comment} onChange={handleInput} />
                     <Form.Button type='submit' primary onClick={handleSubmit}>Save</Form.Button>
                 </Form>
             </Container>
-            {/* <Button primary onClick={handleSubmit}>Add details</Button>
-            </Form> */}
         </div>
     )
 }

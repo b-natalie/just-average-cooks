@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header, Icon } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
 function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
@@ -63,7 +63,6 @@ function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
                     <Header.Content>{userObj.first_name} {userObj.last_name}'s Recipes</Header.Content>
                 </Header>
                     <br />
-                {/* WORK ON BUTTON - CHANGE IF FOLLOWING */}
                 {isFollowedByMe ? <Button onClick={handleUnfollow}>Unfollow</Button> : <Button primary onClick={handleFollow}>Follow</Button>}
             </div>
             <br />
