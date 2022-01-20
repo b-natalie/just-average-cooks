@@ -59,10 +59,10 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
         <>
             <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
             <Switch>
-                <Route path="/myrecipes">
+                <Route path="/my-recipes">
                     <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes}/>
                 </Route>
-                <Route path="/addrecipe">
+                <Route path="/add-recipe">
                     <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>
                 </Route>
                 <Route path="/recipes/:id/edit">
@@ -74,7 +74,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
                 <Route path="/users/:id">
                     <OtherUserPage currentUser={currentUser} toggleIsFollowChanged={toggleIsFollowChanged}/>
                 </Route>
-                <Route path="/myprofile">
+                <Route path="/my-profile">
                     <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
                 </Route>
                 <Route path="/recipes-people-i-follow" >

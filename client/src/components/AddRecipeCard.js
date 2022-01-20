@@ -6,7 +6,7 @@ import image from "../ImageAddRecipe.jpg"
 function AddRecipeCard() {
     return (
         <Grid.Column>
-            <Link to={"/addrecipe"}>
+            <Link to={"/add-recipe"}>
                 <Image
                     rounded
                     src={image}

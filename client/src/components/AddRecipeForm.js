@@ -46,7 +46,7 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
                 changeToRecipe()
                 toggleUpdated()
                 recipeId = data.id
-                history.push(`/myrecipes`)
+                history.push(`/my-recipes`)
             })
     }
 

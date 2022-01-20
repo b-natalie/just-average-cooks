@@ -13,7 +13,7 @@ function NavBar({ handleLogout, profilePic }) {
         //   onClick={this.handleItemClick}
         />
       </Link>
-      <Link to="/myrecipes">
+      <Link to="/my-recipes">
         <Menu.Item
           name='my recipes'
         //   active={activeItem === 'messages'}
@@ -28,13 +28,13 @@ function NavBar({ handleLogout, profilePic }) {
         />
       </Link>
       <Menu.Menu position='right' verticalAlign="center">
-        <Link to="/myprofile">
+        <Link to="/my-profile">
           <Menu.Item>
             <Icon size="large" name="envelope outline"/>
           </Menu.Item>
         </Link>
         {/* <Button color="green"><Icon name="envelope outline"/></Button> */}
-        <Link to="/myprofile">
+        <Link to="/my-profile">
           <Menu.Item>
             <Image src={profilePic} avatar/>
           </Menu.Item>

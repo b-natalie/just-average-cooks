@@ -8,7 +8,7 @@ function RecipeCreatorComments({ recipeObj, currentUser }) {
             <Header as='h3' icon textAlign='center'>
                 <Header.Content>Creator</Header.Content>
             </Header>
-            <Link to={recipeObj.creator.id === currentUser.id ? "/myrecipes" : `/users/${recipeObj.creator.id}`}><p><Image avatar src={recipeObj.creator.image} />{recipeObj.creator.first_name} {recipeObj.creator.last_name}</p></Link>
+            <Link to={recipeObj.creator.id === currentUser.id ? "/my-recipes" : `/users/${recipeObj.creator.id}`}><p><Image avatar src={recipeObj.creator.image} />{recipeObj.creator.first_name} {recipeObj.creator.last_name}</p></Link>
             <Header as='h3' icon textAlign='center'>
                 <Header.Content>Comments</Header.Content>
             </Header>

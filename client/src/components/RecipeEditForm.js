@@ -7,11 +7,9 @@ function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
 
     const recipeId = useParams().id;
     const history = useHistory()
-    // const [recIngsArr, setRecIngsArr] = useState([])
     const [isEdited, setIsEdited] = useState(false)
 
     const [recipeObj, setRecipeObj] = useState({
-        // rec_ings: [],
         all_ingredients: "",
         instructions: "",
         creator: {},
@@ -29,7 +27,6 @@ function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
             .then(resp => resp.json())
             .then(recipe => {
                 setRecipeObj(recipe)
-                // setRecIngsArr(recipe.rec_ings)
                 setMyPostEdit(recipe.my_post_info)
             })
     }, [])
@@ -80,7 +77,7 @@ function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
 
     function handleDelete() {
         deleteRecipe(recipeId)
-        history.push("/myrecipes")
+        history.push("/my-recipes")
     }
 
     return (
