@@ -10,9 +10,11 @@ function MyRecipesContainer({ selectedMyRecipes, filterMySelectedRecipes }) {
         <div style={{textAlign: "center"}}>
             <Container>
             <h2>My Saved Recipes</h2>
-            <h4>How many free minutes do you have?</h4>
+            <p>How much free time do you have?</p>
             <TimeSelector filterForTime={filterMySelectedRecipes} />
-            <Grid verticalAlign='middle' columns={5} centered>
+            <p>(minutes)</p>
+            <Grid columns={5} centered>
+            {/* <Grid verticalAlign='middle' columns={5} centered> */}
                 <Grid.Row>
                     <AddRecipeCard />
                     {selectedMyRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
