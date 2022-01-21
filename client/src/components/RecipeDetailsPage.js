@@ -103,7 +103,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
             <br />
             <RecipeTimesBar recipeObj={recipeObj} />
             <br />
-            <h3>Makes: </h3><p>{recipeObj.servings}</p>
+            <h3>Servings: </h3><p>{recipeObj.servings}</p>
             <RecipeIngredients ingredients={recipeObj.all_ingredients} />
             <br />
             <RecipeInstructions recipeObj={recipeObj} />
