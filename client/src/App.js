@@ -135,7 +135,7 @@ function App() {
 
   if (!authChecked) { return <div></div> }
   return (
-    <div>
+    <div style={{position: "relative"}}>
       <Image src={logo} />
       <Route>
         {currentUser ? (
@@ -161,7 +161,12 @@ function App() {
         )
         }
       </Route>
-      <Image src={footer} style={{position: "relative", bottom: 0}}/>
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* <Image src={footer} style={{position: "relative", bottom: 0}}/> */}
+      <Image src={footer} style={{position: "fixed", bottom: 0}}/>
     </div>
   )
 }
