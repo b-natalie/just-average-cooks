@@ -36,8 +36,8 @@ Keeping in mind that this is not for gourmet chefs, the idea is not to create or
 - Post
     user_id
     recipe_id
-    simplicity (rating 1-5)
-    taste (rating 1-5)
+    simplicity
+    taste
     comment
 - Follow
     user_id for follower
