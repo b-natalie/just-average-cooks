@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Grid, Image } from "semantic-ui-react";
-import image from "../ImageAddRecipe.jpg"
+import image from "../AddNewRecipe.jpg"
 
 function AddRecipeCard() {
     return (
         <Grid.Column>
-            <Link to={"/addrecipe"}>
+            <Link to={"/add-recipe"}>
                 <Image
                     rounded
                     src={image}
