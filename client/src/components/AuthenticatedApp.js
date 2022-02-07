@@ -55,6 +55,10 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, s
         }
     }
 
+    // function filterSearch(searchTerm) {
+    //     setSelectedRecipes(allRecipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    // }
+
     return (
         <>
             <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
