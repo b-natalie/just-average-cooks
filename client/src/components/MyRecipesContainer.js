@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Container } from 'semantic-ui-react';
 import AddRecipeCard from "./AddRecipeCard";
 import RecipeCard from "./RecipeCard";
 import TimeSelector from "./TimeSelector";
 
-function MyRecipesContainer({ selectedMyRecipes, filterMySelectedRecipes }) {
+function MyRecipesContainer({ currentUser, filterMySelectedRecipes }) {
+
+    const [ filteredMyRec, setFilteredMyRec ] = useState([...currentUser.reposted_recipes])
 
     return (
         <div style={{textAlign: "center"}}>
@@ -12,12 +14,11 @@ function MyRecipesContainer({ selectedMyRecipes, filterMySelectedRecipes }) {
             <h2>My Saved Recipes</h2>
             <p>How much free time do you have?</p>
             <TimeSelector filterForTime={filterMySelectedRecipes} />
-            <p>(minutes)</p>
+            {/* <p>(minutes)</p> */}
             <Grid columns={5} centered>
-            {/* <Grid verticalAlign='middle' columns={5} centered> */}
                 <Grid.Row>
                     <AddRecipeCard />
-                    {selectedMyRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
+                    {filteredMyRec.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
                 </Grid.Row>
             </Grid>
             </Container>

@@ -10,82 +10,117 @@ import RecipeContainer from "./RecipeContainer";
 import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
-function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, saveRecipe, unsaveRecipe, updateProfileInfo, filteredRecIFollow, filterFollowRec, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, filterMySelectedRecipes, deleteRecipe, changeToRecipe }) {
+// function AuthenticatedApp({ currentUser, updateCurrentUser, saveRecipe, unsaveRecipe, updateProfileInfo, filteredRecIFollow, filterFollowRec, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, deleteRecipe, changeToRecipe }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser }) {
 
-    const [ allRecipes, setAllRecipes ] = useState([])
-    const [ selectedRecipes, setSelectedRecipes ] = useState([])
-    const [ isUpdated, setIsUpdated ] = useState(false)
+    const [allRecipes, setAllRecipes] = useState([])
+    // const [selectedRecipes, setSelectedRecipes] = useState([])
+    const [isUpdated, setIsUpdated] = useState(false)
 
     let history = useHistory();
 
     useEffect(() => {
         fetch("/api/v1/recipes")
-        .then(resp => resp.json())
-        .then(recipeData => {
-            setAllRecipes(recipeData)
-            setSelectedRecipes(recipeData)
-        })
+            .then(resp => resp.json())
+            .then(recipeData => {
+                setAllRecipes(recipeData)
+                // setSelectedRecipes(recipeData)
+            })
     }, [isUpdated])
 
     function handleLogout() {
         fetch("/logout", {
             method: "DELETE"
         })
-        .then(resp => {
-            if (resp.ok) {
-                updateCurrentUser(null)
-                history.push("/")
-            }
-        })
+            .then(resp => {
+                if (resp.ok) {
+                    updateCurrentUser(null)
+                    history.push("/")
+                }
+            })
     }
 
     function toggleUpdated() {
         setIsUpdated(!isUpdated)
     }
 
-    function filterForTime(time) {
-        if (time === "0") {
-            setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time < 21))
-        } else if (time === "21") {
-            setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 20 && recipe.total_time < 41))
-        } else if (time === "41") {
-            setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 40))
-        } else {
-            setSelectedRecipes([...allRecipes])
-        }
-    }
+    // function filterForTime(time) {
+    //     if (time === "0") {
+    //         setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time < 21))
+    //     } else if (time === "21") {
+    //         setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 20 && recipe.total_time < 41))
+    //     } else if (time === "41") {
+    //         setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 40))
+    //     } else {
+    //         setSelectedRecipes([...allRecipes])
+    //     }
+    // }
 
     // function filterSearch(searchTerm) {
     //     setSelectedRecipes(allRecipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm.toLowerCase())))
     // }
+
+    // return (
+    //     <>
+    //         <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
+    //         <Switch>
+    //             <Route path="/my-recipes">
+    //                 {/* <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes} /> */}
+    //                 <MyRecipesContainer currentUser={currentUser} />
+    //             </Route>
+    //             <Route path="/add-recipe">
+    //                 <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated} />
+    //             </Route>
+    //             <Route path="/recipes/:id/edit">
+    //                 <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated} />
+    //             </Route>
+    //             <Route path="/recipes/:id">
+    //                 <RecipeDetailsPage currentUser={currentUser} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe} />
+    //             </Route>
+    //             <Route path="/users/:id">
+    //                 <OtherUserPage currentUser={currentUser} toggleIsFollowChanged={toggleIsFollowChanged} />
+    //             </Route>
+    //             <Route path="/my-profile">
+    //                 <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe} />
+    //             </Route>
+    //             <Route path="/recipes-people-i-follow" >
+    //                 <PeopleIFollowRecipesContainer filteredRecIFollow={filteredRecIFollow} filterFollowRec={filterFollowRec} />
+    //             </Route>
+    //             <Route path="/recipes">
+    //                 <RecipeContainer allRecipes={allRecipes} selectedRecipes={selectedRecipes} filterForTime={filterForTime} />
+    //             </Route>
+    //         </Switch>
+    //     </>
+    // )
 
     return (
         <>
             <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
             <Switch>
                 <Route path="/my-recipes">
-                    <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes}/>
+                    {/* <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes} /> */}
+                    <MyRecipesContainer currentUser={currentUser} />
                 </Route>
                 <Route path="/add-recipe">
-                    <AddRecipeForm addMyRecipeToMyContainer={addMyRecipeToMyContainer} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>
+                    <AddRecipeForm currentUser={currentUser} toggleUpdated={toggleUpdated} />
                 </Route>
                 <Route path="/recipes/:id/edit">
-                    <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} changeToRecipe={changeToRecipe} toggleUpdated={toggleUpdated}/>
+                    <RecipeEditForm currentUser={currentUser} toggleUpdated={toggleUpdated} />
                 </Route>
                 <Route path="/recipes/:id">
-                    <RecipeDetailsPage currentUser={currentUser} saveRecipe={saveRecipe} unsaveRecipe={unsaveRecipe}/>
+                    <RecipeDetailsPage currentUser={currentUser} />
                 </Route>
                 <Route path="/users/:id">
-                    <OtherUserPage currentUser={currentUser} toggleIsFollowChanged={toggleIsFollowChanged}/>
+                    <OtherUserPage currentUser={currentUser} />
                 </Route>
                 <Route path="/my-profile">
-                    <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe}/>
+                    <MyProfileSettings currentUser={currentUser} />
                 </Route>
                 <Route path="/recipes-people-i-follow" >
-                    <PeopleIFollowRecipesContainer filteredRecIFollow={filteredRecIFollow} filterFollowRec={filterFollowRec} />
+                    <PeopleIFollowRecipesContainer currentUser={currentUser} />
                 </Route>
                 <Route path="/recipes">
-                    <RecipeContainer allRecipes={allRecipes} selectedRecipes={selectedRecipes} filterForTime={filterForTime}/>
+                    <RecipeContainer allRecipes={allRecipes} />
                 </Route>
             </Switch>
         </>

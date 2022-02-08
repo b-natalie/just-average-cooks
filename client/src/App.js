@@ -11,7 +11,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isCurrentUserChanged, setIsCurrentUserChanged] = useState(false)
   const [authChecked, setAuthChecked] = useState(false)
-  const [savedRecipes, setSavedRecipes] = useState([])
   const [recIFollowArr, setRecIFollowArr] = useState([])
   const [filteredRecIFollow, setFilteredRecIFollow] = useState([])
   const [isSavedOrUnsaved, setIsSavedOrUnsaved] = useState(false)
@@ -19,7 +18,6 @@ function App() {
   const [peopleIFollow, setPeopleIFollow] = useState([])
   const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
   const [isFollowChanged, setIsFollowChanged] = useState(false)
-  const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
 
   useEffect(() => {
     fetch("/me")
@@ -28,8 +26,8 @@ function App() {
           resp.json().then(user => {
             setCurrentUser(user)
             setAuthChecked(true)
-            setSavedRecipes(user.reposted_recipes)
-            setSelectedMyRecipes(user.reposted_recipes)
+            // setSavedRecipes(user.reposted_recipes)
+            // setSelectedMyRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
             setFilteredRecIFollow(user.people_i_follow_recipes)
             setPeopleIFollow(user.followed)
@@ -101,25 +99,25 @@ function App() {
     setIsCurrentUserChanged(!isCurrentUserChanged)
   }
 
-  function addMyRecipeToMyContainer(recipe) {
-    setSavedRecipes([...savedRecipes, recipe])
-  }
+  // function addMyRecipeToMyContainer(recipe) {
+  //   setSavedRecipes([...savedRecipes, recipe])
+  // }
 
   function toggleIsFollowChanged() {
     setIsFollowChanged(!isFollowChanged)
   }
 
-  function filterMySelectedRecipes(time) {
-    if (time === "0") {
-      setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
-    } else if (time === "21") {
-      setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
-    } else if (time === "41") {
-      setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
-    } else {
-      setSelectedMyRecipes([...savedRecipes])
-    }
-  }
+  // function filterMySelectedRecipes(time) {
+  //   if (time === "0") {
+  //     setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
+  //   } else if (time === "21") {
+  //     setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
+  //   } else if (time === "41") {
+  //     setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
+  //   } else {
+  //     setSelectedMyRecipes([...savedRecipes])
+  //   }
+  // }
 
   function filterFollowRec(time) {
     if (time === "0") {
@@ -142,7 +140,6 @@ function App() {
           <AuthenticatedApp
             currentUser={currentUser}
             updateCurrentUser={updateCurrentUser}
-            selectedMyRecipes={selectedMyRecipes}
             saveRecipe={saveRecipe}
             unsaveRecipe={unsaveRecipe}
             updateProfileInfo={updateProfileInfo}
@@ -150,9 +147,8 @@ function App() {
             filterFollowRec={filterFollowRec}
             peopleIFollow={peopleIFollow}
             peopleFollowingMe={peopleFollowingMe}
-            addMyRecipeToMyContainer={addMyRecipeToMyContainer}
+            // addMyRecipeToMyContainer={addMyRecipeToMyContainer}
             toggleIsFollowChanged={toggleIsFollowChanged}
-            filterMySelectedRecipes={filterMySelectedRecipes}
             deleteRecipe={deleteRecipe}
             changeToRecipe={changeToRecipe}
           />
