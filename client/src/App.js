@@ -11,11 +11,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isCurrentUserChanged, setIsCurrentUserChanged] = useState(false)
   const [authChecked, setAuthChecked] = useState(false)
-  const [savedRecipes, setSavedRecipes] = useState([])
-  const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
+  // const [savedRecipes, setSavedRecipes] = useState([])
+  // const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
   const [recIFollowArr, setRecIFollowArr] = useState([])
-  const [peopleIFollow, setPeopleIFollow] = useState([])
-  const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
+  // const [peopleIFollow, setPeopleIFollow] = useState([])
+  // const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
   const [isChangeMade, setIsChangeMade] = useState(false)
 
   useEffect(() => {
@@ -25,11 +25,11 @@ function App() {
           resp.json().then(user => {
             setCurrentUser(user)
             setAuthChecked(true)
-            setSavedRecipes(user.reposted_recipes)
-            setSelectedMyRecipes(user.reposted_recipes)
+            // setSavedRecipes(user.reposted_recipes)
+            // setSelectedMyRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
-            setPeopleIFollow(user.followed)
-            setPeopleFollowingMe(user.fans)
+            // setPeopleIFollow(user.followed)
+            // setPeopleFollowingMe(user.fans)
           })
         } else {
           setAuthChecked(true)

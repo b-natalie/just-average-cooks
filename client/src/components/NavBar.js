@@ -11,12 +11,12 @@ function NavBar({ handleLogout, profilePic }) {
           name='discover all'
         />
       </Link>
-      <Link to="/my-recipes">
+      <Link to="/recipes/mine">
         <Menu.Item
           name='my recipes'
         />
       </Link>
-      <Link to="/recipes-people-i-follow">
+      <Link to="/recipes/people-i-follow">
         <Menu.Item
           name='recipes i follow'
         />

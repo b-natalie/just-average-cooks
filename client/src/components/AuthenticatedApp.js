@@ -13,6 +13,7 @@ import RecipeEditForm from "./RecipeEditForm";
 function AuthenticatedApp({ currentUser, updateCurrentUser, updateProfileInfo, recIFollowArr, toggleIsChangeMade }) {
 
     const [myRecipes, setMyRecipes] = useState([...currentUser.reposted_recipes])
+    // const [recIFollowArr, setRecIFollowArr] = useState([...currentUser.people_i_follow_recipes])
 
     let history = useHistory();
 
@@ -40,11 +41,14 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, updateProfileInfo, r
         <>
             <NavBar profilePic={currentUser.image} handleLogout={handleLogout} />
             <Switch>
-                <Route path="/my-recipes">
+                <Route path="/recipes/mine">
                     <MyRecipesContainer myRecipes={myRecipes} />
                 </Route>
-                <Route path="/add-recipe">
+                <Route path="/recipes/new">
                     <AddRecipeForm addNewRecipe={addNewRecipe} toggleIsChangeMade={toggleIsChangeMade} />
+                </Route>
+                <Route path="/recipes/people-i-follow" >
+                    <PeopleIFollowRecipesContainer recIFollowArr={recIFollowArr} />
                 </Route>
                 <Route path="/recipes/:id/edit">
                     <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} toggleIsChangeMade={toggleIsChangeMade} />
@@ -57,9 +61,6 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, updateProfileInfo, r
                 </Route>
                 <Route path="/my-profile">
                     <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} />
-                </Route>
-                <Route path="/recipes-people-i-follow" >
-                    <PeopleIFollowRecipesContainer recIFollowArr={recIFollowArr} />
                 </Route>
                 <Route path="/recipes">
                     <RecipeContainer />

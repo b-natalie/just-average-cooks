@@ -41,7 +41,7 @@ function AddRecipeForm({ addNewRecipe }) {
             .then(resp => resp.json())
             .then(data => {
                 addNewRecipe(data)
-                history.push(`/my-recipes`)
+                history.push(`/recipes/mine`)
             })
     }
 
