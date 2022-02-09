@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Container, Grid, Header, Icon } from 'semantic-ui-react';
+import { Button, Container, Grid, Header } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
 function OtherUserPage({ currentUser, toggleIsChangeMade }) {

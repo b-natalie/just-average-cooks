@@ -41,26 +41,6 @@ function Login({ updateCurrentUser, toggleIsCurrentUserChanged }) {
     }
 
     return (
-        // <Form style={{
-        //     height: '70vh',
-        //     display: 'flex',
-        //     flexDirection: 'column',
-        //     alignItems: 'center',
-        //     justifyContent: 'center',
-        //     }} 
-        //     onSubmit={handleSubmit}
-        // >
-        //     <Form.Field onChange={(e) => setEmail(e.target.value)}>
-        //         <label>Email</label>
-        //         <input placeholder='example@gmail.com' />
-        //     </Form.Field>
-        //     <Form.Field onChange={(e) => setPassword(e.target.value)}>
-        //         <label>Password</label>
-        //         <input type="password" placeholder='*******' />
-        //     </Form.Field>
-        //     <Button type='submit'>Submit</Button>
-        // </Form>
-        // <Container style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <Container>
             <br/>
             <div style={{textAlign: "center", justifyContent: "center", alignItems: "center"}} >

@@ -1,12 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Image, Input, Icon, Menu } from 'semantic-ui-react';
+import { Image, Menu } from 'semantic-ui-react';
 
 function NavBar({ handleLogout, profilePic }) {
-
-  // function submitSearch(e) {
-  //   filterSearch(e.target.value)
-  // }
 
   return (
     <Menu secondary>
@@ -27,14 +23,6 @@ function NavBar({ handleLogout, profilePic }) {
       </Link>
 
       <Menu.Menu position='right' verticalAlign="center">
-        {/* <Link to="/my-profile">
-          <Menu.Item>
-            <Icon size="large" name="envelope outline"/>
-          </Menu.Item>
-        </Link> */}
-        {/* <Menu.Item>
-          <Input icon='search' placeholder='Search...' onChange={submitSearch} />
-        </Menu.Item> */}
         <Link to="/my-profile">
           <Menu.Item>
             <Image src={profilePic} avatar/>

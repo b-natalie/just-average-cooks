@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header, Image, List, Container } from 'semantic-ui-react';
+import { Grid, Header, List, Container } from 'semantic-ui-react';
 import FollowingFollowerCard from "./FollowingFollowerCard";
 
 function FollowingFollowerContainer({ peopleIFollow, peopleFollowingMe }) {

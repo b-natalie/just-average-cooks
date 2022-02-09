@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header, Button, Image } from 'semantic-ui-react';
+import { Header, Button } from 'semantic-ui-react';
 import EditMyProfile from "./EditMyProfile";
 import EditPassword from "./EditPassword";
 import FollowingFollowerContainer from "./FollowingFollowerContainer";

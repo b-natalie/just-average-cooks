@@ -32,11 +32,9 @@ function EditPassword({ togglePwEditMode }) {
     return (
         <Container>
             <Form style={{ textAlign: "center" }} onSubmit={handleSave}>
-                {/* <Form.Group widths='equal'> */}
                     <Form.Input fluid label='Old Password' type="password" name="password" value={passwordInfo.password} onChange={handleChange} />
                     <br/>
                     <Form.Input fluid label='New Password' type="password" name="new_password" value={passwordInfo.new_password} onChange={handleChange} />
-                {/* </Form.Group> */}
                 <Form.Button primary>Save</Form.Button>
             </Form>
         </Container>

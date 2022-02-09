@@ -9,7 +9,6 @@ function RecipeCard({ recipe }) {
                 <Image
                     rounded
                     src={recipe.image}
-                    // as='a'
                     size='medium'
                     target='_blank'
                 />
