@@ -26,7 +26,6 @@ function PeopleIFollowRecipesContainer({ recIFollowArr }) {
                 <h2>Recipes From People I Follow</h2>
                 <p>How much time do you have? <br /> (in minutes)</p>
                 <TimeSelector filterRecipes={filterRecipes} />
-                <p>(minutes)</p>
                 <Grid columns={5} centered >
                     <Grid.Row>
                         {filteredRecIFollow.length > 0 ? filteredRecIFollow.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />) : <h3>Nothing to see here, yet!<br /><br />Check out the <Link to="/recipes">discover page</Link></h3>}
