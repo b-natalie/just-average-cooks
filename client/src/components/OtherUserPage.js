@@ -60,7 +60,6 @@ function OtherUserPage({ currentUser, toggleIsChangeMade }) {
                 <div style={{ textAlign: "center" }}>
                     <img src={userObj.image} style={{ maxHeight: 125, borderRadius: 175 / 2 }} />
                     <Header as='h2' icon textAlign='center'>
-                        {/* <Icon name='users' circular /> */}
                         <Header.Content>{userObj.first_name} {userObj.last_name}'s Recipes</Header.Content>
                     </Header>
                     <br />

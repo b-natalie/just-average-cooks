@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router";
 import { Image, Input } from "semantic-ui-react";
 
 function TimeSelector({ filterRecipes }) {
-
-    const location = useLocation().pathname;
 
     const [ short, setShort ] = useState("not-active")
     const [ medium, setMedium ] = useState("not-active")

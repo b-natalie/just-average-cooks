@@ -49,25 +49,21 @@ function RecipeDetailsPage({ currentUser, addNewRecipe, deleteRecipe }) {
               recipe_id: recipeId
             })
           })
-            .then(resp => resp.json())
-            .then(postData => {
-            //   setIsChangeMade(!isChangeMade)
-                addNewRecipe(recipeObj)
-                setIsSaved(true)
-            })
-        // saveRecipe(recipeId)
+        .then(resp => resp.json())
+        .then(postData => {
+            addNewRecipe(recipeObj)
+            setIsSaved(true)
+        })
     }
 
     function handleUnsave() {
         fetch(`/api/v1/posts/${postId}`, {
             method: "DELETE"
           })
-            .then(data => {
-              deleteRecipe(recipeId)
-              setIsSaved(false)
-            })
-        // unsaveRecipe(postId)
-        // setIsSaved(false)
+        .then(data => {
+            deleteRecipe(recipeId)
+            setIsSaved(false)
+        })
     }
 
     function toggleEditMode() {

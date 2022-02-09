@@ -5,7 +5,7 @@ import { Image } from "semantic-ui-react";
 import AuthenticatedApp from "./components/AuthenticatedApp";
 import UnauthenticatedApp from "./components/UnauthenticatedApp";
 import logo from "./JustAverageCooksBanner.png";
-import footer from "./Footer.png";
+// import footer from "./Footer.png";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -14,7 +14,6 @@ function App() {
   const [savedRecipes, setSavedRecipes] = useState([])
   const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
   const [recIFollowArr, setRecIFollowArr] = useState([])
-  // const [isProfileUpdated, setIsProfileUpdated] = useState(false)
   const [peopleIFollow, setPeopleIFollow] = useState([])
   const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
   const [isChangeMade, setIsChangeMade] = useState(false)
@@ -38,42 +37,6 @@ function App() {
       })
   }, [isCurrentUserChanged, isChangeMade]);
 
-  // function saveRecipe(recipeId) {
-  //   fetch("/api/v1/posts", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       recipe_id: recipeId
-  //     })
-  //   })
-  //     .then(resp => resp.json())
-  //     .then(postData => {
-  //       setIsChangeMade(!isChangeMade)
-  //     })
-  // }
-
-  // function unsaveRecipe(postId) {
-  //   fetch(`/api/v1/posts/${postId}`, {
-  //     method: "DELETE"
-  //   })
-  //     .then(data => {
-  //       setIsChangeMade(!isChangeMade)
-  //     })
-  // }
-
-  function deleteRecipe(recipeId) {
-    // fetch(`/api/v1/recipes/${recipeId}`, {
-    //   method: "DELETE"
-    // })
-    //   .then(data => {
-    //     setIsChangeMade(!isChangeMade)
-    //   })
-
-  }
-
   function updateProfileInfo(updatedUserInfo) {
     fetch(`/api/v1/users/${currentUser.id}`, {
       method: "PATCH",
@@ -95,25 +58,9 @@ function App() {
     setIsCurrentUserChanged(!isCurrentUserChanged)
   }
 
-  // function addMyRecipeToMyContainer(recipe) {
-  //   setSavedRecipes([...savedRecipes, recipe])
-  // }
-
   function toggleIsChangeMade() {
     setIsChangeMade(!isChangeMade)
   }
-
-  // function filterFollowRec(time) {
-  //   if (time === "0") {
-  //     setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
-  //   } else if (time === "21") {
-  //     setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
-  //   } else if (time === "41") {
-  //     setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
-  //   } else {
-  //     setFilteredRecIFollow([...recIFollowArr])
-  //   }
-  // }
 
   if (!authChecked) { return <div></div> }
   return (
@@ -124,16 +71,8 @@ function App() {
           <AuthenticatedApp
             currentUser={currentUser}
             updateCurrentUser={updateCurrentUser}
-            selectedMyRecipes={selectedMyRecipes}
-            // saveRecipe={saveRecipe}
-            // unsaveRecipe={unsaveRecipe}
             updateProfileInfo={updateProfileInfo}
             recIFollowArr={recIFollowArr}
-            // filterFollowRec={filterFollowRec}
-            peopleIFollow={peopleIFollow}
-            peopleFollowingMe={peopleFollowingMe}
-            deleteRecipe={deleteRecipe}
-            updateProfileInfo={updateProfileInfo}
             toggleIsChangeMade={toggleIsChangeMade}
           />
         ) : (
@@ -146,7 +85,7 @@ function App() {
       <br />
       <br />
       {/* <Image src={footer} style={{position: "relative", bottom: 0}}/> */}
-      <Image src={footer} style={{position: "fixed", bottom: 0}}/>
+      {/* <Image src={footer} style={{position: "fixed", bottom: 0}}/> */}
     </div>
   )
 }
