@@ -14,8 +14,7 @@ function App() {
   const [savedRecipes, setSavedRecipes] = useState([])
   const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
   const [recIFollowArr, setRecIFollowArr] = useState([])
-  const [filteredRecIFollow, setFilteredRecIFollow] = useState([])
-  const [isProfileUpdated, setIsProfileUpdated] = useState(false)
+  // const [isProfileUpdated, setIsProfileUpdated] = useState(false)
   const [peopleIFollow, setPeopleIFollow] = useState([])
   const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
   const [isChangeMade, setIsChangeMade] = useState(false)
@@ -30,7 +29,6 @@ function App() {
             setSavedRecipes(user.reposted_recipes)
             setSelectedMyRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
-            setFilteredRecIFollow(user.people_i_follow_recipes)
             setPeopleIFollow(user.followed)
             setPeopleFollowingMe(user.fans)
           })
@@ -38,7 +36,7 @@ function App() {
           setAuthChecked(true)
         }
       })
-  }, [isCurrentUserChanged, isProfileUpdated, isChangeMade]);
+  }, [isCurrentUserChanged, isChangeMade]);
 
   // function saveRecipe(recipeId) {
   //   fetch("/api/v1/posts", {
@@ -57,14 +55,14 @@ function App() {
   //     })
   // }
 
-  function unsaveRecipe(postId) {
-    fetch(`/api/v1/posts/${postId}`, {
-      method: "DELETE"
-    })
-      .then(data => {
-        setIsChangeMade(!isChangeMade)
-      })
-  }
+  // function unsaveRecipe(postId) {
+  //   fetch(`/api/v1/posts/${postId}`, {
+  //     method: "DELETE"
+  //   })
+  //     .then(data => {
+  //       setIsChangeMade(!isChangeMade)
+  //     })
+  // }
 
   function deleteRecipe(recipeId) {
     // fetch(`/api/v1/recipes/${recipeId}`, {
@@ -86,7 +84,7 @@ function App() {
       body: JSON.stringify(updatedUserInfo)
     })
       .then(resp => resp.json())
-      .then(userData => setIsProfileUpdated(!isProfileUpdated))
+      .then(userData => setIsChangeMade(!isChangeMade))
   }
 
   function updateCurrentUser(newUser) {
@@ -105,17 +103,17 @@ function App() {
     setIsChangeMade(!isChangeMade)
   }
 
-  function filterFollowRec(time) {
-    if (time === "0") {
-      setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
-    } else if (time === "21") {
-      setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
-    } else if (time === "41") {
-      setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
-    } else {
-      setFilteredRecIFollow([...recIFollowArr])
-    }
-  }
+  // function filterFollowRec(time) {
+  //   if (time === "0") {
+  //     setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
+  //   } else if (time === "21") {
+  //     setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
+  //   } else if (time === "41") {
+  //     setFilteredRecIFollow(recIFollowArr.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
+  //   } else {
+  //     setFilteredRecIFollow([...recIFollowArr])
+  //   }
+  // }
 
   if (!authChecked) { return <div></div> }
   return (
@@ -128,15 +126,14 @@ function App() {
             updateCurrentUser={updateCurrentUser}
             selectedMyRecipes={selectedMyRecipes}
             // saveRecipe={saveRecipe}
-            unsaveRecipe={unsaveRecipe}
+            // unsaveRecipe={unsaveRecipe}
             updateProfileInfo={updateProfileInfo}
             recIFollowArr={recIFollowArr}
-            // filteredRecIFollow={filteredRecIFollow}
-            filterFollowRec={filterFollowRec}
+            // filterFollowRec={filterFollowRec}
             peopleIFollow={peopleIFollow}
             peopleFollowingMe={peopleFollowingMe}
-            // addMyRecipeToMyContainer={addMyRecipeToMyContainer}
             deleteRecipe={deleteRecipe}
+            updateProfileInfo={updateProfileInfo}
             toggleIsChangeMade={toggleIsChangeMade}
           />
         ) : (

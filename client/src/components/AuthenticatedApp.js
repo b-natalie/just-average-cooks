@@ -91,7 +91,7 @@ function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, u
                     <OtherUserPage currentUser={currentUser} toggleIsChangeMade={toggleIsChangeMade} />
                 </Route>
                 <Route path="/my-profile">
-                    <MyProfileSettings currentUser={currentUser} />
+                    <MyProfileSettings currentUser={currentUser} updateProfileInfo={updateProfileInfo} />
                 </Route>
                 <Route path="/recipes-people-i-follow" >
                     <PeopleIFollowRecipesContainer recIFollowArr={recIFollowArr} />

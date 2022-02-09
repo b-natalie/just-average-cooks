@@ -118,7 +118,6 @@ function RecipeEditForm({ deleteRecipe, toggleIsChangeMade }) {
                 </Form.Group>
                 <Form.TextArea label='Ingredients' name="all_ingredients" value={recipeObj.all_ingredients} onChange={handleRecipeInput} />
                 <Form.TextArea label='Steps (new line = new step)' name="instructions" value={recipeObj.instructions} onChange={handleRecipeInput} />
-                <Form.TextArea label='Comment' name="comment" value={myPostEdit.comment} onChange={handlePostInput} />
                 <Form.Group widths='equal'>
                     <Form.Field>
                         <label>Simplicity (of 10)</label>
@@ -129,6 +128,7 @@ function RecipeEditForm({ deleteRecipe, toggleIsChangeMade }) {
                         <Input fluid name="taste" value={myPostEdit.taste} onChange={handlePostInput} />
                     </Form.Field>
                 </Form.Group>
+                <Form.TextArea label='Comment' name="comment" value={myPostEdit.comment} onChange={handlePostInput} />
                 <Form.Button type='submit' primary onClick={handleSubmit}>Save</Form.Button>
             </Form>
             <br/>

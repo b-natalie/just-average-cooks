@@ -24,7 +24,6 @@ import FollowingFollowerContainer from "./FollowingFollowerContainer";
                 <div>
                     <div style={{ textAlign: "center", justifyContent: "center" }}>
                         <Header as='h2' icon textAlign='center'>
-                            {/* <Icon name='users' circular /> */}
                             <Header.Content>Profile Settings</Header.Content>
                         </Header>
                         <img src={currentUser.image} style={{ maxHeight: 175, borderRadius: 175 / 2 }} />

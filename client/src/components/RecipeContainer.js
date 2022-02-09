@@ -5,8 +5,8 @@ import TimeSelector from "./TimeSelector";
 
 function RecipeContainer() {
 
-    const [ allRecipes, setAllRecipes ] = useState([])
-    const [ filteredRecipes, setFilteredRecipes ] = useState([])
+    const [allRecipes, setAllRecipes] = useState([])
+    const [filteredRecipes, setFilteredRecipes] = useState([])
 
     useEffect(() => {
         fetch("/api/v1/recipes")
@@ -31,16 +31,16 @@ function RecipeContainer() {
     }
 
     return (
-        <div style={{textAlign: "center"}}>
+        <div style={{ textAlign: "center" }}>
             <Container>
-            <h2>Recipes From Around The World</h2>
-            <p>How much time do you have? <br /> (in minutes)</p>
-            <TimeSelector filterRecipes={filterRecipes} />
-            <Grid columns={5} centered >
-                <Grid.Row>
-                    {filteredRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
-                </Grid.Row>
-            </Grid>
+                <h2>Recipes From Around The World</h2>
+                <p>How much time do you have? <br /> (in minutes)</p>
+                <TimeSelector filterRecipes={filterRecipes} />
+                <Grid columns={5} centered >
+                    <Grid.Row>
+                        {filteredRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
+                    </Grid.Row>
+                </Grid>
             </Container>
         </div>
     )
