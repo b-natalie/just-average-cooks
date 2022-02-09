@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Button, Grid, Header, Icon } from 'semantic-ui-react';
 import RecipeCard from "./RecipeCard";
 
-function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
+function OtherUserPage({ currentUser, toggleIsChangeMade }) {
 
     const userId = useParams().id
     const [ userObj, setUserObj ] = useState({
@@ -40,7 +40,7 @@ function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
         })
         .then(data => {
             setIsFollowedByMe(true)
-            toggleIsFollowChanged();
+            toggleIsChangeMade();
         })
     }
 
@@ -50,7 +50,7 @@ function OtherUserPage({ currentUser, toggleIsFollowChanged }) {
         })
         .then(data => {
             setIsFollowedByMe(false)
-            toggleIsFollowChanged();
+            toggleIsChangeMade();
         })
     }
 

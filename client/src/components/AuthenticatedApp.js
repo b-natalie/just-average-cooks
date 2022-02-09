@@ -11,54 +11,31 @@ import RecipeDetailsPage from "./RecipeDetailsPage";
 import RecipeEditForm from "./RecipeEditForm";
 
 // function AuthenticatedApp({ currentUser, updateCurrentUser, saveRecipe, unsaveRecipe, updateProfileInfo, filteredRecIFollow, filterFollowRec, peopleIFollow, peopleFollowingMe, addMyRecipeToMyContainer, toggleIsFollowChanged, deleteRecipe, changeToRecipe }) {
-function AuthenticatedApp({ currentUser, updateCurrentUser }) {
+function AuthenticatedApp({ currentUser, updateCurrentUser, selectedMyRecipes, updateProfileInfo, filteredRecIFollow, recIFollowArr, peopleIFollow, peopleFollowingMe, toggleIsChangeMade }) {
 
-    const [allRecipes, setAllRecipes] = useState([])
-    // const [selectedRecipes, setSelectedRecipes] = useState([])
-    const [isUpdated, setIsUpdated] = useState(false)
+    const [myRecipes, setMyRecipes] = useState([...currentUser.reposted_recipes])
 
     let history = useHistory();
-
-    useEffect(() => {
-        fetch("/api/v1/recipes")
-            .then(resp => resp.json())
-            .then(recipeData => {
-                setAllRecipes(recipeData)
-                // setSelectedRecipes(recipeData)
-            })
-    }, [isUpdated])
 
     function handleLogout() {
         fetch("/logout", {
             method: "DELETE"
         })
-            .then(resp => {
-                if (resp.ok) {
-                    updateCurrentUser(null)
-                    history.push("/")
-                }
-            })
+        .then(resp => {
+            if (resp.ok) {
+                updateCurrentUser(null)
+                history.push("/")
+            }
+        })
     }
 
-    function toggleUpdated() {
-        setIsUpdated(!isUpdated)
+    function addNewRecipe(recipe) {
+        setMyRecipes([...myRecipes, recipe])
     }
 
-    // function filterForTime(time) {
-    //     if (time === "0") {
-    //         setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time < 21))
-    //     } else if (time === "21") {
-    //         setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 20 && recipe.total_time < 41))
-    //     } else if (time === "41") {
-    //         setSelectedRecipes(allRecipes.filter(recipe => recipe.total_time > 40))
-    //     } else {
-    //         setSelectedRecipes([...allRecipes])
-    //     }
-    // }
-
-    // function filterSearch(searchTerm) {
-    //     setSelectedRecipes(allRecipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    // }
+    function deleteRecipe(recipeId) {
+        setMyRecipes(myRecipes.filter(recipe => recipe.id !== parseInt(recipeId)))
+    }
 
     // return (
     //     <>
@@ -99,28 +76,28 @@ function AuthenticatedApp({ currentUser, updateCurrentUser }) {
             <Switch>
                 <Route path="/my-recipes">
                     {/* <MyRecipesContainer selectedMyRecipes={selectedMyRecipes} filterMySelectedRecipes={filterMySelectedRecipes} /> */}
-                    <MyRecipesContainer currentUser={currentUser} />
+                    <MyRecipesContainer myRecipes={myRecipes} />
                 </Route>
                 <Route path="/add-recipe">
-                    <AddRecipeForm currentUser={currentUser} toggleUpdated={toggleUpdated} />
+                    <AddRecipeForm addNewRecipe={addNewRecipe} toggleIsChangeMade={toggleIsChangeMade} />
                 </Route>
                 <Route path="/recipes/:id/edit">
-                    <RecipeEditForm currentUser={currentUser} toggleUpdated={toggleUpdated} />
+                    <RecipeEditForm currentUser={currentUser} deleteRecipe={deleteRecipe} toggleIsChangeMade={toggleIsChangeMade} />
                 </Route>
                 <Route path="/recipes/:id">
-                    <RecipeDetailsPage currentUser={currentUser} />
+                    <RecipeDetailsPage currentUser={currentUser} addNewRecipe={addNewRecipe} deleteRecipe={deleteRecipe}/>
                 </Route>
                 <Route path="/users/:id">
-                    <OtherUserPage currentUser={currentUser} />
+                    <OtherUserPage currentUser={currentUser} toggleIsChangeMade={toggleIsChangeMade} />
                 </Route>
                 <Route path="/my-profile">
                     <MyProfileSettings currentUser={currentUser} />
                 </Route>
                 <Route path="/recipes-people-i-follow" >
-                    <PeopleIFollowRecipesContainer currentUser={currentUser} />
+                    <PeopleIFollowRecipesContainer recIFollowArr={recIFollowArr} />
                 </Route>
                 <Route path="/recipes">
-                    <RecipeContainer allRecipes={allRecipes} />
+                    <RecipeContainer />
                 </Route>
             </Switch>
         </>

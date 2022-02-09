@@ -10,7 +10,7 @@ import MyRecipePost from "./MyRecipePost";
 import EditMyRecipePost from "./EditMyRecipePost";
 
 
-function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
+function RecipeDetailsPage({ currentUser, addNewRecipe, deleteRecipe }) {
 
     const recipeId = useParams().id
     const history = useHistory()
@@ -39,13 +39,35 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
     }, [isSaved, isUpdated])
 
     function handleSave() {
-        saveRecipe(recipeId)
-        setIsSaved(true)
+        fetch("/api/v1/posts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              recipe_id: recipeId
+            })
+          })
+            .then(resp => resp.json())
+            .then(postData => {
+            //   setIsChangeMade(!isChangeMade)
+                addNewRecipe(recipeObj)
+                setIsSaved(true)
+            })
+        // saveRecipe(recipeId)
     }
 
     function handleUnsave() {
-        unsaveRecipe(postId)
-        setIsSaved(false)
+        fetch(`/api/v1/posts/${postId}`, {
+            method: "DELETE"
+          })
+            .then(data => {
+              deleteRecipe(recipeId)
+              setIsSaved(false)
+            })
+        // unsaveRecipe(postId)
+        // setIsSaved(false)
     }
 
     function toggleEditMode() {
@@ -86,6 +108,7 @@ function RecipeDetailsPage({ currentUser, saveRecipe, unsaveRecipe }) {
             <div style={{textAlign: "center"}}>
                 <Header as='h2' icon textAlign='center'>
                     <Header.Content>{recipeObj.name}</Header.Content>
+                    {console.log(isSaved)}
                     {isSaved ? <Button size='mini' onClick={handleUnsave}>Saved</Button> : <Button primary size='mini' onClick={handleSave}>Save</Button>}
                 </Header>
                 <RecipeRatings recipeObj={recipeObj} />

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Image, Container } from 'semantic-ui-react';
 import EditIngredientsContainer from "./EditIngredientsContainer";
 
-function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated }) {
+function AddRecipeForm({ addNewRecipe, toggleIsChangeMade }) {
 
     const [newRecipeAndPost, setNewRecipeAndPost] = useState({
         name: "",
@@ -42,10 +42,8 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
         })
             .then(resp => resp.json())
             .then(data => {
-                addMyRecipeToMyContainer(data)
-                changeToRecipe()
-                toggleUpdated()
-                recipeId = data.id
+                addNewRecipe(data)
+                // recipeId = data.id
                 history.push(`/my-recipes`)
             })
     }
@@ -97,6 +95,7 @@ function AddRecipeForm({ addMyRecipeToMyContainer, changeToRecipe, toggleUpdated
                     <Form.TextArea label='Comment' name="comment" value={newRecipeAndPost.comment} onChange={handleInput} />
                     <Form.Button type='submit' primary onClick={handleSubmit}>Save</Form.Button>
                 </Form>
+                <br />
             </Container>
         </div>
     )

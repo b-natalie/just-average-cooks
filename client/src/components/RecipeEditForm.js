@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Form, Input, Button, Image, Container } from 'semantic-ui-react'
-import EditIngredientsContainer from "./EditIngredientsContainer";
 
-function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
+function RecipeEditForm({ deleteRecipe, toggleIsChangeMade }) {
 
     const recipeId = useParams().id;
     const history = useHistory()
@@ -69,15 +68,20 @@ function RecipeEditForm({ deleteRecipe, changeToRecipe, toggleUpdated }) {
             .then(data => {
                 setIsEdited(!isEdited);
                 history.push(`/recipes/${recipeId}`);
-                changeToRecipe();
-                toggleUpdated();
+                toggleIsChangeMade()
             })
-        )
+            )
     }
 
     function handleDelete() {
-        deleteRecipe(recipeId)
-        history.push("/my-recipes")
+        fetch(`/api/v1/recipes/${recipeId}`, {
+            method: "DELETE"
+          })
+            .then(data => {
+                deleteRecipe(recipeId)
+                history.push("/my-recipes")
+                toggleIsChangeMade()
+            })
     }
 
     return (

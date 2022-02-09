@@ -4,7 +4,8 @@ import EditMyProfile from "./EditMyProfile";
 import EditPassword from "./EditPassword";
 import FollowingFollowerContainer from "./FollowingFollowerContainer";
 
-function MyProfileSettings({ currentUser, updateProfileInfo, peopleIFollow, peopleFollowingMe }) {
+// function MyProfileSettings({ currentUser, updateProfileInfo, peopleIFollow, peopleFollowingMe }) {
+    function MyProfileSettings({ currentUser, updateProfileInfo }) {
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [isPwEditMode, setIsPwEditMode] = useState(false);
@@ -35,7 +36,7 @@ function MyProfileSettings({ currentUser, updateProfileInfo, peopleIFollow, peop
                         <Button secondary size="tiny" onClick={togglePwEditMode}>Edit password</Button>
                     </div>
                     <br />
-                    <FollowingFollowerContainer peopleIFollow={peopleIFollow} peopleFollowingMe={peopleFollowingMe} />
+                    <FollowingFollowerContainer peopleIFollow={currentUser.followed} peopleFollowingMe={currentUser.fans} />
                 </div>
             )
         } else if (isEditMode) {

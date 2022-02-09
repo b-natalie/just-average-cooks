@@ -11,13 +11,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isCurrentUserChanged, setIsCurrentUserChanged] = useState(false)
   const [authChecked, setAuthChecked] = useState(false)
+  const [savedRecipes, setSavedRecipes] = useState([])
+  const [selectedMyRecipes, setSelectedMyRecipes] = useState([...savedRecipes])
   const [recIFollowArr, setRecIFollowArr] = useState([])
   const [filteredRecIFollow, setFilteredRecIFollow] = useState([])
-  const [isSavedOrUnsaved, setIsSavedOrUnsaved] = useState(false)
   const [isProfileUpdated, setIsProfileUpdated] = useState(false)
   const [peopleIFollow, setPeopleIFollow] = useState([])
   const [peopleFollowingMe, setPeopleFollowingMe] = useState([])
-  const [isFollowChanged, setIsFollowChanged] = useState(false)
+  const [isChangeMade, setIsChangeMade] = useState(false)
 
   useEffect(() => {
     fetch("/me")
@@ -26,8 +27,8 @@ function App() {
           resp.json().then(user => {
             setCurrentUser(user)
             setAuthChecked(true)
-            // setSavedRecipes(user.reposted_recipes)
-            // setSelectedMyRecipes(user.reposted_recipes)
+            setSavedRecipes(user.reposted_recipes)
+            setSelectedMyRecipes(user.reposted_recipes)
             setRecIFollowArr(user.people_i_follow_recipes)
             setFilteredRecIFollow(user.people_i_follow_recipes)
             setPeopleIFollow(user.followed)
@@ -37,41 +38,42 @@ function App() {
           setAuthChecked(true)
         }
       })
-  }, [isCurrentUserChanged, isSavedOrUnsaved, isProfileUpdated, isFollowChanged]);
+  }, [isCurrentUserChanged, isProfileUpdated, isChangeMade]);
 
-  function saveRecipe(recipeId) {
-    fetch("/api/v1/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        recipe_id: recipeId
-      })
-    })
-      .then(resp => resp.json())
-      .then(postData => {
-        setIsSavedOrUnsaved(!isSavedOrUnsaved)
-      })
-  }
+  // function saveRecipe(recipeId) {
+  //   fetch("/api/v1/posts", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       recipe_id: recipeId
+  //     })
+  //   })
+  //     .then(resp => resp.json())
+  //     .then(postData => {
+  //       setIsChangeMade(!isChangeMade)
+  //     })
+  // }
 
   function unsaveRecipe(postId) {
     fetch(`/api/v1/posts/${postId}`, {
       method: "DELETE"
     })
       .then(data => {
-        setIsSavedOrUnsaved(!isSavedOrUnsaved)
+        setIsChangeMade(!isChangeMade)
       })
   }
 
   function deleteRecipe(recipeId) {
-    fetch(`/api/v1/recipes/${recipeId}`, {
-      method: "DELETE"
-    })
-      .then(data => {
-        setIsSavedOrUnsaved(!isSavedOrUnsaved)
-      })
+    // fetch(`/api/v1/recipes/${recipeId}`, {
+    //   method: "DELETE"
+    // })
+    //   .then(data => {
+    //     setIsChangeMade(!isChangeMade)
+    //   })
+
   }
 
   function updateProfileInfo(updatedUserInfo) {
@@ -91,10 +93,6 @@ function App() {
     setCurrentUser(newUser);
   }
 
-  function changeToRecipe() {
-    setIsSavedOrUnsaved(!isSavedOrUnsaved)
-  }
-
   function toggleIsCurrentUserChanged() {
     setIsCurrentUserChanged(!isCurrentUserChanged)
   }
@@ -103,21 +101,9 @@ function App() {
   //   setSavedRecipes([...savedRecipes, recipe])
   // }
 
-  function toggleIsFollowChanged() {
-    setIsFollowChanged(!isFollowChanged)
+  function toggleIsChangeMade() {
+    setIsChangeMade(!isChangeMade)
   }
-
-  // function filterMySelectedRecipes(time) {
-  //   if (time === "0") {
-  //     setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time < 21))
-  //   } else if (time === "21") {
-  //     setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 20 && recipe.cook_time + recipe.prep_time < 41))
-  //   } else if (time === "41") {
-  //     setSelectedMyRecipes(savedRecipes.filter(recipe => recipe.cook_time + recipe.prep_time > 40))
-  //   } else {
-  //     setSelectedMyRecipes([...savedRecipes])
-  //   }
-  // }
 
   function filterFollowRec(time) {
     if (time === "0") {
@@ -140,17 +126,18 @@ function App() {
           <AuthenticatedApp
             currentUser={currentUser}
             updateCurrentUser={updateCurrentUser}
-            saveRecipe={saveRecipe}
+            selectedMyRecipes={selectedMyRecipes}
+            // saveRecipe={saveRecipe}
             unsaveRecipe={unsaveRecipe}
             updateProfileInfo={updateProfileInfo}
-            filteredRecIFollow={filteredRecIFollow}
+            recIFollowArr={recIFollowArr}
+            // filteredRecIFollow={filteredRecIFollow}
             filterFollowRec={filterFollowRec}
             peopleIFollow={peopleIFollow}
             peopleFollowingMe={peopleFollowingMe}
             // addMyRecipeToMyContainer={addMyRecipeToMyContainer}
-            toggleIsFollowChanged={toggleIsFollowChanged}
             deleteRecipe={deleteRecipe}
-            changeToRecipe={changeToRecipe}
+            toggleIsChangeMade={toggleIsChangeMade}
           />
         ) : (
           <UnauthenticatedApp updateCurrentUser={updateCurrentUser} toggleIsCurrentUserChanged={toggleIsCurrentUserChanged} />
