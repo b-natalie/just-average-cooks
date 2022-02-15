@@ -13,7 +13,6 @@ import RecipeEditForm from "./RecipeEditForm";
 function AuthenticatedApp({ currentUser, updateCurrentUser, updateProfileInfo, recIFollowArr, toggleIsChangeMade }) {
 
     const [myRecipes, setMyRecipes] = useState([...currentUser.reposted_recipes])
-    // const [recIFollowArr, setRecIFollowArr] = useState([...currentUser.people_i_follow_recipes])
 
     let history = useHistory();
 
